@@ -2,6 +2,7 @@ SI1 UFCG 2016.2: AD-EXTREME
 ===
 
 Esse repositório contém a implementação do projeto de conclusão da disciplina **Sistemas de Informação I**, período **2016.2**, **Universidade Federal de Campina Grande**.
+===
 
 ### Descrição
 Tem-se como descrição do projeto o que se segue:
