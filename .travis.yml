@@ -6,6 +6,6 @@ postgres:
   username: postgres
   password: admin
 before_script:
-        - "psql -U postgres template1 -c 'alter user postgres with password "admin";'"
+        - "psql -U postgres template1 -c "alter user postgres with password 'admin'""
 notifications:
   slack: dreamteamsi1:3Ngf9fFmx8JOmxaA7GDwOdd6
