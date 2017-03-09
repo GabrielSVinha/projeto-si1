@@ -5,4 +5,5 @@ ad-extreme.iml
 mvnw
 mvnw.cmd
 target/
-
+.project
+.metadata
