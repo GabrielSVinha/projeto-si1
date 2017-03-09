@@ -17,7 +17,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
+        public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 

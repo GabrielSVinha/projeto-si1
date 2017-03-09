@@ -17,8 +17,10 @@ public class UsuarioFactory {
         switch (form.getRole()){
             case 1:
                 user = new UsuarioPessoa(form.getNome(), form.getEmail(), form.getSenha());
+                break;
             case 2:
                 user = new UsuarioEmpresa(form.getNome(), form.getEmail(), form.getSenha());
+                break;
         }
         return user;
     }
