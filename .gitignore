@@ -1,5 +1,8 @@
-.idea/
+.idea
+.DS_Store
+._*
 ad-extreme.iml
 mvnw
 mvnw.cmd
 target/
+
