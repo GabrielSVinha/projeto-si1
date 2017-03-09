@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model;
+package br.edu.ufcg.computacao.si1.model.usuario;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
-public class Usuario extends org.springframework.security.core.userdetails.User{
+public abstract class Usuario extends org.springframework.security.core.userdetails.User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

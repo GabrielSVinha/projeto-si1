@@ -1,8 +1,9 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Usuario;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+import br.edu.ufcg.computacao.si1.service.factory.UsuarioFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
+
 
     private UsuarioRepository usuarioRepository;
 
@@ -22,23 +24,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public Usuario create(UsuarioForm usuarioForm) {
 
-        Usuario usuario=null;
+        Usuario usuario = UsuarioFactory.create(usuarioForm);
 
-        switch (usuarioForm.getRole()){
-            case 1:
-                usuario = new Usuario(usuarioForm.getNome(), usuarioForm.getEmail(),
-                        usuarioForm.getSenha(), "USER");
-                break;
-            case 2:
-                usuario = new Usuario(usuarioForm.getNome(), usuarioForm.getEmail(),
-                        usuarioForm.getSenha(), "COMPANY");
-
-                //new BCryptPasswordEncoder().encode(usuarioForm.getSenha()), "COMPANY");
-                usuario.setR("COMPANY");
-                break;
-        }
-
-        System.out.println(usuario + "estah sendo criado");
+        System.out.println(usuario.getClass() + " estah sendo criado");
+        System.out.println("Repo: " + usuarioRepository + " salvando");
         return usuarioRepository.save(usuario);
     }
 
@@ -49,7 +38,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public Optional<Usuario> getByEmail(String email) {
-        System.out.println(email + "estah sendo retornado");
+        System.out.println(email + " estah sendo retornado");
+
         return Optional.ofNullable(usuarioRepository.findByEmail(email));
     }
 
@@ -77,4 +67,5 @@ public class UsuarioServiceImpl implements UsuarioService{
         }
         return false;
     }
+
 }
