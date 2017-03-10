@@ -29,24 +29,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                    .antMatchers("/","/cadastrar-se").permitAll()
-                    .antMatchers("/user/**").hasAuthority("USER")
-                    .antMatchers("/company/**").hasAuthority("COMPANY")
-                    .anyRequest().fullyAuthenticated()
-                .and()
-            .formLogin()
-                    .loginPage("/login").permitAll()
-                    .successHandler(new CustomAuthenticationSuccessHandler())
-                    .failureUrl("/login?error")
-                .and()
-            .logout()
-                    .logoutUrl("/logout")
-                    .deleteCookies("remember-me","JSESSIONID")
-                    .logoutSuccessUrl("/login").permitAll()
-                .and()
-                    .rememberMe();
+//        http
+//            .authorizeRequests()
+//                    .antMatchers("/","/cadastrar-se").permitAll()
+//                    .antMatchers("/user/**").hasAuthority("USER")
+//                    .antMatchers("/company/**").hasAuthority("COMPANY")
+//                    .anyRequest().fullyAuthenticated()
+//                .and()
+//            .formLogin()
+//                    .loginPage("/login").permitAll()
+//                    .successHandler(new CustomAuthenticationSuccessHandler())
+//                    .failureUrl("/login?error")
+//                .and()
+//            .logout()
+//                    .logoutUrl("/logout")
+//                    .deleteCookies("remember-me","JSESSIONID")
+//                    .logoutSuccessUrl("/login").permitAll()
+//                .and()
+//                    .rememberMe();
     }
 
     /**
