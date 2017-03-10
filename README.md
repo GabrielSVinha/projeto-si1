@@ -1,7 +1,10 @@
-[![Build Status](https://travis-ci.org/GabrielSVinha/projeto-si1.svg?branch=master)](https://travis-ci.org/GabrielSVinha/projeto-si1)
-
 SI1 UFCG 2016.2: AD-EXTREME
 ===
+
+|Branch|Status|
+|---|---|
+|master|[![Build Status](https://travis-ci.org/GabrielSVinha/projeto-si1.svg?branch=master)](https://travis-ci.org/GabrielSVinha/projeto-si1)|
+
 
 Esse repositório contém a implementação do projeto de conclusão da disciplina **Sistemas de Informação I**, período **2016.2**, Universidade Federal de Campina Grande.
 
