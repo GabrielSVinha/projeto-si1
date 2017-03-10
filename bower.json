@@ -1,0 +1,19 @@
+{
+  "name": "ad-extreme",
+  "homepage": "https://github.com/GabrielSVinha/projeto-si1",
+  "authors": [
+    "Lucas Cordeiro <ecdb.lucas@gmail.com>",
+    "Gabriel Vinha <gabriel.vinha@ccc.ufcg.edu.br>",
+    "Priscilla Brito <PrscllSBrito@gmail.com>",
+    "Kaio Kassiano <kaio.kassiano.oliveira@ccc.ufcg.edu.br>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-ui-router": "^0.4.2",
+    "bootstrap": "^3.3.7"
+  }
+}

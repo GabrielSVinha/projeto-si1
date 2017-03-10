@@ -1,4 +1,5 @@
 .idea
+.vscode
 .DS_Store
 ._*
 ad-extreme.iml
@@ -7,3 +8,5 @@ mvnw.cmd
 target/
 .project
 .metadata
+
+/src/main/resources/static/libs
