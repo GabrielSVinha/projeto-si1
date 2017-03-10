@@ -16,7 +16,7 @@ Tem-se como descrição do projeto o que se segue:
 ### Tecnologias e requisitos
 O AD-EXTREME utiliza os seguintes frameworks/tecnologias:
 
-* [Thymeleaf](http://www.thymeleaf.org)
+* ~~[Thymeleaf](http://www.thymeleaf.org)~~ [AngularJS 1.x](https://angularjs.org/)
 * [Spring Boot](https://projects.spring.io/spring-boot/)
 * [PostgreSQL](https://www.postgresql.org/)
 
