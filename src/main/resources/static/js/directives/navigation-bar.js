@@ -8,7 +8,7 @@
     function NavigationBar() {
         return {
             restrict: 'E',
-            templateUrl: '/js/directives/navigation-bar/view.html'
+            templateUrl: '/views/navigation-bar.html'
         };
     }
 })();

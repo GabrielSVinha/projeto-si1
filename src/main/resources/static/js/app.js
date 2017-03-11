@@ -5,7 +5,7 @@ var app = angular.module('ad-extreme', ['ui.router'])
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: '/js/views/home.html',
+                templateUrl: '/views/home.html',
                 controller: 'HomeController',
                 controllerAs: 'home'
             })
