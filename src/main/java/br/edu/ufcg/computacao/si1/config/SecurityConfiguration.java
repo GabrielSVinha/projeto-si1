@@ -29,24 +29,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http
-           .authorizeRequests()
-                   .antMatchers("/", "/cadastrar-se", "/vendor/**", "/views/**").permitAll()
-                   .antMatchers("/user/**").hasAuthority("USER")
-                   .antMatchers("/company/**").hasAuthority("COMPANY")
-                   .anyRequest().fullyAuthenticated()
-               .and()
-           .formLogin()
-                   .loginPage("/login").permitAll()
-                   .successHandler(new CustomAuthenticationSuccessHandler())
-                   .failureUrl("/login?error")
-               .and()
-           .logout()
-                   .logoutUrl("/logout")
-                   .deleteCookies("remember-me","JSESSIONID")
-                   .logoutSuccessUrl("/login").permitAll()
-               .and()
-                   .rememberMe();
+        http
+            .authorizeRequests()
+                    .antMatchers("/", "/cadastrar-se", "/vendor/**", "/views/**").permitAll()
+                    .antMatchers("/user/**").hasAuthority("USER")
+                    .antMatchers("/company/**").hasAuthority("COMPANY")
+                    .anyRequest().fullyAuthenticated()
+                .and()
+            .formLogin()
+                    .loginPage("/login").permitAll()
+                    .successHandler(new CustomAuthenticationSuccessHandler())
+                    .failureUrl("/login?error")
+                .and()
+            .logout()
+                    .logoutUrl("/logout")
+                    .deleteCookies("remember-me","JSESSIONID")
+                    .logoutSuccessUrl("/login").permitAll()
+                .and()
+                    .rememberMe();
     }
 
     /**
@@ -64,10 +64,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select email as username,senha as password, true as enabled from tb_usuario where email=?")
-                .authoritiesByUsernameQuery(
-                        "select email as username, role from tb_usuario where email=?");
+            .usersByUsernameQuery(
+                "select email as username,senha as password, true as enabled from tb_usuario where email=?")
+            .authoritiesByUsernameQuery(
+                "select email as username, role from tb_usuario where email=?");
     }
 
 //    @Autowired
