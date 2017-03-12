@@ -1,4 +1,4 @@
-var app = angular.module('ad-extreme', ['ui.router'])
+var app = angular.module('ad-extreme', ['ui.router', 'ngMessages'])
     .config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider) {
         $locationProvider.html5Mode(true);
 
@@ -10,9 +10,15 @@ var app = angular.module('ad-extreme', ['ui.router'])
                 controllerAs: 'home'
             })
             .state('register', {
-                url: '/cadastrar-se'
+                url: '/cadastrar-se',
+                templateUrl: '/views/register.html',
+                controller: 'RegisterController',
+                controllerAs: 'register'
             })
             .state('login', {
-                url: '/login'
+                url: '/login',
+                templateUrl: '/views/login.html',
+                controller: 'LoginController',
+                controllerAs: 'login'
             });
     }]);

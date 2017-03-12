@@ -1,0 +1,133 @@
+<navigation-bar></navigation-bar>
+
+<div class="col-md-offset-2 col-md-8">
+    <!-- form cadastro begin -->
+    <form class="form-horizontal" name="registerForm">
+        <fieldset>
+            <legend>Cadastro</legend>
+            <!-- name begin -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Nome</label>
+                <div class="col-md-4">
+                    <input
+                        class="form-control input-md"
+                        name="name"
+                        placeholder="Nome"
+                        required
+                        ng-model="user.name"
+                    />
+                </div>
+            </div>
+            <!-- name end -->
+
+            <!-- email begin -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input
+                        id="email"
+                        class="form-control input-md"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        ng-model="user.email"
+                    />
+                </div>
+            </div>
+            <!-- email end -->
+
+            <!-- password begin -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="senha">Senha</label>
+                <div class="col-md-4">
+                    <input
+                        id="senha"
+                        class="form-control input-md"
+                        name="senha"
+                        type="password"
+                        placeholder="Senha"
+                        minlength="1"
+                        maxlength="16"
+                        required
+                        ng-model="user.password"
+                    />
+                </div>
+            </div>
+            <!-- password end -->
+
+            <!-- confirmPassword begin -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="confirmpassword">Confirmar Senha</label>
+                <div class="col-md-4">
+                    <input
+                        id="confirmpassword"
+                        class="form-control input-md"
+                        name="confirmPassword"
+                        type="password"
+                        placeholder="Confirmar Senha"
+                        minlength="4"
+                        maxlength="16"
+                        ng-model="user.confirmPassword"
+                    />
+                </div>
+            </div>
+            <!-- confirmPassword end -->
+
+            <!-- socialReason begin -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Razão Social</label>
+                <div class="col-md-4">
+                    <!-- pessoa física -->
+                    <label class="radio-inline">
+                        <input
+                            type="radio"
+                            name="role"
+                            required
+                            ng-value="0"
+                            ng-model="user.role"
+                        />
+                        Pessoa Física
+                    </label>
+
+                    <!-- pessoa jurídica -->
+                    <label class="radio-inline">
+                        <input
+                            type="radio"
+                            name="role"
+                            required
+                            ng-value="1"
+                            ng-model="user.role"
+                        />
+                        Pessoa Jurídica
+                    </label>
+                </div>
+            </div>
+            <!-- socialReason end -->
+
+            <div class="form-group">
+                <div class="col-md-8 col-md-offset-4">
+                    <button
+                        class="btn btn-success"
+                        type="submit"
+                        ng-disabled="registerForm.$invalid"
+                        ng-click="register.submitForm(user)"
+                    >
+                        Cadastrar-se
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        name="reset"
+                        ng-click="register.resetForm($event, user)"
+                    >
+                        Limpar
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <!-- form cadastro end -->
+</div>
+
+<main-footer></main-footer>

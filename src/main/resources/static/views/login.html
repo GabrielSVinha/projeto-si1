@@ -1,0 +1,79 @@
+<navigation-bar></navigation-bar>
+
+<div class="container">
+    <div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title">Login</div>
+            </div>
+
+            <div style="margin-top: 15px;" class="panel-body" >
+                <form class="form-horizontal" role="form" name="loginForm" method="post">
+                    <!-- username begin -->
+                    <div style="margin-bottom: 15px;">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="username"
+                                value=""
+                                placeholder="Usuário"
+                                required
+                                ng-model="user.username"
+                            />
+                        </div>
+                    </div>
+                    <!-- username end -->
+
+                    <!-- password begin -->
+                    <div style="margin-bottom: 15px;">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input
+                                class="form-control"
+                                type="password"
+                                name="password"
+                                placeholder="Senha"
+                                required
+                                ng-model="user.password"
+                            />
+                        </div>
+
+                        <div
+                            ng-messages="loginForm.password.$error"
+                            ng-show="loginForm.password.$invalid && loginForm.password.$touched"
+                        >
+                            <div ng-message="required">
+                                Preencha esse campo
+                            </div>
+                        </div>
+                    </div>
+                    <!-- password end -->
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-11 clearfix">
+                            <div class="checkbox" style="display: inline-block;">
+                                <label>
+                                    <input ng-model="user.rememberMe" type="checkbox" name="remember-me"/>
+                                    Lembra-se
+                                </label>
+                            </div>
+                            <button
+                                type="submit"
+                                class="btn btn-success"
+                                style="float: right;"
+                                ng-click="login.submit(user)"
+                                ng-disabled="loginForm.$invalid"
+                            >
+                                <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main-footer></main-footer>
