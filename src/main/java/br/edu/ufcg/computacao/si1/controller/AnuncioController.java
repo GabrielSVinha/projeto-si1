@@ -5,6 +5,8 @@ import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.List;
 
 @Controller
-public class An {
+public class AnuncioController {
 
     @Autowired
     private AnuncioServiceImpl anuncioService;
@@ -33,15 +37,9 @@ public class An {
         return model;
     }
 
-    @RequestMapping(value = "/user/listar/anuncios", method = RequestMethod.GET)
-    public ModelAndView getPageListarAnuncios(){
-        ModelAndView model = new ModelAndView();
-
-        model.addObject("anuncios", anuncioRep.findAll());
-
-        model.setViewName("user/listar_anuncios");
-
-        return model;
+    @RequestMapping(value = "/anuncios", method = RequestMethod.GET)
+    public ResponseEntity<Collection<Anuncio>> getPageListarAnuncios(){
+        return new ResponseEntity<Collection<Anuncio>>(anuncioService.getAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
