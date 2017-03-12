@@ -1,38 +1,45 @@
-#menu.navbar-default .navbar-brand {
-    color: rgba(255, 255, 255, 1);
-}
-#menu.navbar-default {
+.main-menu.navbar-default {
     font-size: 14px;
     background-color: rgba(0, 136, 204, 1);
-    border-width: 1px;
-    border-radius: 4px;
+    border-radius: 0;
+    border-color: transparent;
 }
-#menu.navbar-default .navbar-nav>li>a {
+
+.main-menu.navbar-default .navbar-brand {
     color: rgba(255, 255, 255, 1);
+}
+
+.main-menu.navbar-default .navbar-nav > li > a {
+    color: rgba(255, 255, 255, .7);
     background-color: rgba(0, 136, 204, 1);
 }
-#menu.navbar-default .navbar-nav>li>a:hover,
-#menu.navbar-default .navbar-nav>li>a:focus {
+
+.main-menu.navbar-default .navbar-nav > li > a:hover,
+.main-menu.navbar-default .navbar-nav > li > a:focus {
     color: rgba(245, 245, 245, 1);
     background-color: rgba(0, 136, 204, 1);
 }
-#menu.navbar-default .navbar-nav>.active>a,
-#menu.navbar-default .navbar-nav>.active>a:hover,
-#menu.navbar-default .navbar-nav>.active>a:focus {
+
+.main-menu.navbar-default .navbar-nav > .active > a:hover,
+.main-menu.navbar-default .navbar-nav > .active > a:focus {
     color: rgba(0, 136, 204, 1);
     background-color: rgba(255, 255, 255, 1);
 }
-#menu.navbar-default .navbar-toggle {
+
+.main-menu.navbar-default .navbar-toggle {
     border-color: #ffffff;
 }
-#menu.navbar-default .navbar-toggle:hover,
-#menu.navbar-default .navbar-toggle:focus {
+
+.main-menu.navbar-default .navbar-toggle:hover,
+.main-menu.navbar-default .navbar-toggle:focus {
     background-color: #ffffff;
 }
-#menu.navbar-default .navbar-toggle .icon-bar {
+
+.main-menu.navbar-default .navbar-toggle .icon-bar {
     background-color: #ffffff;
 }
-#menu.navbar-default .navbar-toggle:hover .icon-bar,
-#menu.navbar-default .navbar-toggle:focus .icon-bar {
+
+.main-menu.navbar-default .navbar-toggle:hover .icon-bar,
+.main-menu.navbar-default .navbar-toggle:focus .icon-bar {
     background-color: #0088cc;
 }
