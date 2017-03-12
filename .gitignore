@@ -1,5 +1,7 @@
 .idea
 .vscode
+.settings
+.classpath
 .DS_Store
 ._*
 ad-extreme.iml
