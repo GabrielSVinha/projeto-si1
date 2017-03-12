@@ -11,4 +11,4 @@ target/
 .project
 .metadata
 
-/src/main/resources/static/libs
+vendor/
