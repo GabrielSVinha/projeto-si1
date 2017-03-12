@@ -10,7 +10,7 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages'])
                 controllerAs: 'home'
             })
             .state('register', {
-                url: '/cadastrar-se',
+                url: '/cadastre-se',
                 templateUrl: '/views/register.html',
                 controller: 'RegisterController',
                 controllerAs: 'register'
