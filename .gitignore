@@ -7,3 +7,4 @@ mvnw.cmd
 target/
 .project
 .metadata
+node_modules/
