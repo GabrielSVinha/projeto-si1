@@ -1,7 +1,13 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.Notas;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioEmprego;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioImovel;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioMovel;
+import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.model.usuario.UsuarioEmpresa;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -30,12 +36,18 @@ public class AnuncioServiceTest {
 
     private Anuncio anuncio1, anuncio2, anuncio3;
 
+    private AnuncioForm form1, form2, form3;
+
+    private Usuario owner = new UsuarioEmpresa();
 
     @Before
     public void setUp() {
-        anuncio1 = new Anuncio("Anuncio de Movel", new Date(), 100, Notas.notas[2], "movel");
-        anuncio2 = new Anuncio("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "imovel");
-        anuncio3 = new Anuncio("Anuncio de Emprego", new Date(), 0, Notas.notas[1], "emprego");
+        anuncio1 = new AnuncioMovel("Anuncio de Movel", new Date(), 100, Notas.notas[2], "movel", owner);
+        anuncio2 = new AnuncioImovel("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "imovel", owner);
+        anuncio3 = new AnuncioEmprego("Anuncio de Emprego", new Date(), 0, Notas.notas[1], "emprego", owner);
+        form1 = new AnuncioForm(anuncio1);
+        form2 = new AnuncioForm(anuncio2);
+        form3 = new AnuncioForm(anuncio3);
     }
 
     @After
@@ -52,9 +64,9 @@ public class AnuncioServiceTest {
 
     @Test
     public void testCreateAd() {
-        Anuncio anuncio1FromDB = anuncioService.create(anuncio1);
-        Anuncio anuncio2FromDB = anuncioService.create(anuncio2);
-        Anuncio anuncio3FromDB = anuncioService.create(anuncio3);
+        Anuncio anuncio1FromDB = anuncioService.create(form1);
+        Anuncio anuncio2FromDB = anuncioService.create(form2);
+        Anuncio anuncio3FromDB = anuncioService.create(form3);
 
         assertNotNull(anuncio1FromDB);
         assertNotNull(anuncio2FromDB);
@@ -78,9 +90,9 @@ public class AnuncioServiceTest {
 
         int QTDE_ANUNCIOS_ESPERADA = 1;
 
-        Anuncio anuncioMovel = anuncioService.create(anuncio1);
-        Anuncio anuncioImovel = anuncioService.create(anuncio2);
-        Anuncio anuncioEmprego = anuncioService.create(anuncio3);
+        Anuncio anuncioMovel = anuncioService.create(form1);
+        Anuncio anuncioImovel = anuncioService.create(form2);
+        Anuncio anuncioEmprego = anuncioService.create(form3);
 
         assertNotNull(anuncioMovel);
         assertNotNull(anuncioImovel);
@@ -102,10 +114,9 @@ public class AnuncioServiceTest {
     @Test
     public void testGetAll() {
         int QTDE_ANUNCIOS_ESPERADA = 3;
-
-        Anuncio anuncioMovel = anuncioService.create(anuncio1);
-        Anuncio anuncioImovel = anuncioService.create(anuncio2);
-        Anuncio anuncioEmprego = anuncioService.create(anuncio3);
+        Anuncio anuncioMovel = anuncioService.create(form1);
+        Anuncio anuncioImovel = anuncioService.create(form2);
+        Anuncio anuncioEmprego = anuncioService.create(form3);
 
         assertNotNull(anuncioMovel);
         assertNotNull(anuncioImovel);
@@ -123,9 +134,9 @@ public class AnuncioServiceTest {
     public void testDelete() {
         int QTDE_ANUNCIOS_ESPERADA = 3;
 
-        Anuncio anuncioMovel = anuncioService.create(anuncio1);
-        Anuncio anuncioImovel = anuncioService.create(anuncio2);
-        Anuncio anuncioEmprego = anuncioService.create(anuncio3);
+        Anuncio anuncioMovel = anuncioService.create(form1);
+        Anuncio anuncioImovel = anuncioService.create(form2);
+        Anuncio anuncioEmprego = anuncioService.create(form3);
 
         assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.getAll().size());
         assertTrue(anuncioService.getAll().contains(anuncioMovel));
@@ -165,9 +176,9 @@ public class AnuncioServiceTest {
 
         String SUFIXO = " editado";
 
-        Anuncio anuncioMovel = anuncioService.create(anuncio1);
-        Anuncio anuncioImovel = anuncioService.create(anuncio2);
-        Anuncio anuncioEmprego = anuncioService.create(anuncio3);
+        Anuncio anuncioMovel = anuncioService.create(form1);
+        Anuncio anuncioImovel = anuncioService.create(form2);
+        Anuncio anuncioEmprego = anuncioService.create(form3);
 
         assertEquals(anuncioMovel, anuncio1);
         assertEquals(anuncioImovel, anuncio2);

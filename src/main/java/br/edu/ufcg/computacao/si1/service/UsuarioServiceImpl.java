@@ -52,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     public boolean update(Usuario usuario) {
         System.out.println(usuario + "estah sendo atualizado");
 
-        if (usuarioRepository.exists(usuario.getId())) {
+        if (usuarioRepository.exists(usuario.getUser_id())) {
             usuarioRepository.save(usuario);
             return true;
         }

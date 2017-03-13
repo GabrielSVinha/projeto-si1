@@ -1,19 +1,17 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import org.springframework.security.core.GrantedAuthority;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.LinkedList;
 
 @Entity(name = "Usuario")
-@Table(name = "tb_usuario")
+@Table(name = "usuarios")
 public abstract class Usuario extends org.springframework.security.core.userdetails.User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long user_id;
     @Column
     private String nome;
     @Column(unique = true)
@@ -22,6 +20,10 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
     private String senha;
     @Column
     private String role;
+
+    @OneToMany(mappedBy = "owner", targetEntity = Anuncio.class, cascade = CascadeType.ALL)
+    @Column
+    private Collection<Anuncio> anuncios;
 
     public Usuario() {
         super("default", "default", AuthorityUtils.createAuthorityList("USER"));
@@ -37,12 +39,12 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
         this.role = role;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getN() {

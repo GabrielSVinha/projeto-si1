@@ -1,7 +1,9 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
+import br.edu.ufcg.computacao.si1.service.factory.AnuncioFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +31,11 @@ public class AnuncioServiceImpl implements AnuncioService {
         return this.anuncioRepository;
     }
 
+    public Collection<Anuncio> getAnunciosDoUsuario(){return null;}
+
     @Override
-    public Anuncio create(Anuncio anuncio) {
-        /*aqui salvamos o anuncio recem criado no repositorio jpa*/
-        return anuncioRepository.save(anuncio);
+    public Anuncio create(AnuncioForm form) {
+        return AnuncioFactory.create(form);
     }
 
     @Override
