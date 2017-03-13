@@ -10,24 +10,43 @@
             <div style="margin-top: 15px;" class="panel-body" >
                 <form class="form-horizontal" role="form" name="loginForm" method="post">
                     <!-- username begin -->
-                    <div style="margin-bottom: 15px;">
+                    <div
+                        style="margin-bottom: 15px;"
+                        ng-class="{
+                            'has-error': loginForm.username.$invalid && loginForm.username.$touched
+                        }"
+                    >
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input
                                 class="form-control"
                                 type="text"
                                 name="username"
-                                value=""
                                 placeholder="Usuário"
                                 required
                                 ng-model="user.username"
                             />
                         </div>
+
+                        <div
+                            class="help-block"
+                            ng-messages="loginForm.username.$error"
+                            ng-show="loginForm.username.$invalid && loginForm.username.$touched"
+                        >
+                            <div ng-message="required">
+                                Preencha esse campo
+                            </div>
+                        </div>
                     </div>
                     <!-- username end -->
 
                     <!-- password begin -->
-                    <div style="margin-bottom: 15px;">
+                    <div
+                        style="margin-bottom: 15px;"
+                        ng-class="{
+                            'has-error': loginForm.password.$invalid && loginForm.password.$touched
+                        }"
+                    >
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input
@@ -41,6 +60,7 @@
                         </div>
 
                         <div
+                            class="help-block"
                             ng-messages="loginForm.password.$error"
                             ng-show="loginForm.password.$invalid && loginForm.password.$touched"
                         >
