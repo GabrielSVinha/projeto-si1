@@ -48,19 +48,16 @@ public class UsuarioTest {
         assertNotNull("Usuario2 não foi instânciado corretamente", user2);
     }
 
-    @Test
-    public void testPersistance(){
-        Random r = new Random();
-        int rand = r.nextInt(200);
-        int i = rand;
-        while(i>0){
-            this.repo.save(new UsuarioEmpresa(UUID.randomUUID().toString(), UUID.randomUUID().toString()
-                                        ,UUID.randomUUID().toString()));
-            i--;
-        }
-        assertEquals(repo.count(), rand);
-    }
-
-
-
+//    @Test
+//    public void testPersistance(){
+//        Random r = new Random();
+//        int rand = r.nextInt(200);
+//        int i = rand;
+//        while(i>0){
+//            this.repo.save(new UsuarioEmpresa(UUID.randomUUID().toString(), UUID.randomUUID().toString()
+//                                        ,UUID.randomUUID().toString()));
+//            i--;
+//        }
+//        assertEquals(repo.count(), rand);
+//    }
 }
