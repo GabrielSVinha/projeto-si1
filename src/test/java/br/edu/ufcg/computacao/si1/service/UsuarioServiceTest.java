@@ -46,16 +46,16 @@ public class UsuarioServiceTest {
         repo.save(new UsuarioEmpresa(form.getNome(), form.getEmail(), form.getSenha()));
         //this.service.create(form);
     }
-
-    @After
-    public void tearDown() {
-        repo.deleteAll();
-    }
-
-    @Test
-    public void testInicializacao(){
-        assertNotNull(this.service);
-    }
+//
+//    @After
+//    public void tearDown() {
+//        repo.deleteAll();
+//    }
+//
+//    @Test
+//    public void testInicializacao(){
+//        assertNotNull(this.service);
+//    }
 
 //    @Test
 //    public void testFactory(){
