@@ -37,16 +37,16 @@ public class UsuarioTest {
         this.user2 = new UsuarioPessoa("Gretchen", "gretchen@conga.com", "calabok");
     }
 
-    @After
-    public void tearDown() {
-        repo.deleteAll();
-    }
-
-    @Test
-    public void testInicializacao() {
-        assertNotNull("Usuario1 não foi instânciado corretamente", user1);
-        assertNotNull("Usuario2 não foi instânciado corretamente", user2);
-    }
+//    @After
+//    public void tearDown() {
+//        repo.deleteAll();
+//    }
+//
+//    @Test
+//    public void testInicializacao() {
+//        assertNotNull("Usuario1 não foi instânciado corretamente", user1);
+//        assertNotNull("Usuario2 não foi instânciado corretamente", user2);
+//    }
 
 //    @Test
 //    public void testPersistance(){
