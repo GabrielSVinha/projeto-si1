@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,7 +17,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/anuncios")
 public class AnuncioController {
 
@@ -36,16 +34,29 @@ public class AnuncioController {
         return new ResponseEntity<Collection<Anuncio>>(anuncioService.getAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Anuncio> deleteAnuncio(@PathVariable long id){
+        if(anuncioService.delete(id)){
+            return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Anuncio>(HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ResponseEntity<Anuncio> cadastroAnuncio(@Valid AnuncioForm anuncioForm, BindingResult result){
-        if(result.hasErrors()){
+    @ResponseBody
+    public ResponseEntity<Anuncio> cadastroAnuncio(@RequestParam(required = true) String titulo,
+                                                   @RequestParam(required = true) String preco,
+                                                   @RequestParam(required = true) String tipo,
+                                                   @RequestParam("user_id") Long user_id){
+        AnuncioForm anuncioForm = new AnuncioForm(titulo.substring(1, titulo.length()-1),
+                                                  Double.parseDouble(preco),
+                                                  tipo.substring(1, tipo.length()-1),
+                                                  (long) user_id);
+
+        if(this.anuncioService.create(anuncioForm) == null){
             return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);
         }
 
-        Anuncio anuncio = this.anuncioService.create(anuncioForm);
-
         return new ResponseEntity<Anuncio>(anuncioService.create(anuncioForm), HttpStatus.OK);
     }
-
-
 }
