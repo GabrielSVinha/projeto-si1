@@ -12,14 +12,19 @@
             // register
         };
 
-        this.resetForm = function(evt, user) {
-            evt.preventDefault();
-
-            for (var key in user) {
-                if (user.hasOwnProperty(key)) {
-                    delete user[key];
-                }
+        this.resetForm = function(user, form) {
+            if (!user) {
+                return;
             }
+
+            user.name = null;
+            user.email = null;
+            user.password = null;
+            user.confirmPassword = null;
+            user.role = null;
+
+            form.$setPristine();
+            form.$setUntouched();
         };
     }
 })();
