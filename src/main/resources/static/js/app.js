@@ -1,4 +1,4 @@
-var app = angular.module('ad-extreme', ['ui.router', 'ngMessages'])
+var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria'])
     .config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider) {
         $locationProvider.html5Mode(true);
 
