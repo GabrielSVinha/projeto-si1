@@ -54,7 +54,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             .addResourceHandler(
                 "/",
                 "/cadastre-se",
-                "/login"
+                "/login",
+                "/anuncios"
             )
             .addResourceLocations("classpath:/static/index.html")
             .setCachePeriod(cachePeriod)

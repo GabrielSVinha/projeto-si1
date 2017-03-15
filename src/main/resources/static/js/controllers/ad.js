@@ -7,6 +7,8 @@
 
     function AdController(){
         var self = this;
+
+        this.ads = [];
     };
 
 })();

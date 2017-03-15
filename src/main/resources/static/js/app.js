@@ -24,5 +24,11 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria'])
                 templateUrl: '/views/login.html',
                 controller: 'LoginController',
                 controllerAs: 'loginCtrl'
+            })
+            .state('ads', {
+                url: '/anuncios',
+                templateUrl: '/views/ad-list.html',
+                controller: 'AdController',
+                controllerAs: 'adsCtrl'
             });
     }]);
