@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UsuarioService {
     Usuario create(UsuarioForm usuarioForm);
 
-    Optional<Usuario> getById(Long id);
+    Usuario getById(Long id);
 
     Optional<Usuario> getByEmail(String email);
 

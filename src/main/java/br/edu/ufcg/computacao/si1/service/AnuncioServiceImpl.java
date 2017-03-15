@@ -22,8 +22,10 @@ public class AnuncioServiceImpl implements AnuncioService {
     private AnuncioRepository anuncioRepository;
 
     @Autowired
+    private AnuncioFactory factory;
+
+    @Autowired
     public AnuncioServiceImpl(AnuncioRepository anuncioRepository) {
-        /*neste codigo apenas atribuimos o repositorio jpa ao atributo */
         this.anuncioRepository = anuncioRepository;
     }
 
@@ -35,13 +37,18 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public Anuncio create(AnuncioForm form) {
-        return AnuncioFactory.create(form);
+        Anuncio anuncio = factory.create(form);
+        if(anuncio != null){
+            anuncioRepository.save(anuncio);
+            return anuncio;
+        }
+        return null;
     }
 
     @Override
-    public Optional<Anuncio> getById(Long id) {
+    public Anuncio getById(Long id) {
         /*aqui recuperamos o anuncio pelo seu id*/
-        return Optional.ofNullable(anuncioRepository.findOne(id));
+        return anuncioRepository.findOne(id);
     }
 
     @Override

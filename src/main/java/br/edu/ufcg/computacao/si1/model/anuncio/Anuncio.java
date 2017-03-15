@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LongSummaryStatistics;
 
 /**
  * Created by Marcus Oliveira on 08/12/16.
@@ -37,7 +38,10 @@ public abstract class Anuncio {
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    @ManyToOne(optional = false)
+    @Column(name = "user_id")
+    private Long user_id;
+
+    @OneToOne(optional = false)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Usuario owner;
 
@@ -48,6 +52,7 @@ public abstract class Anuncio {
         this.nota = nota;
         this.tipo = tipo;
         this.owner = owner;
+        this.user_id = owner.getUser_id();
     }
 
     public Anuncio() {

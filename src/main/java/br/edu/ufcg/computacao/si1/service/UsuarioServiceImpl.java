@@ -5,20 +5,22 @@ import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import br.edu.ufcg.computacao.si1.service.factory.UsuarioFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @Service
+@Configurable
 public class UsuarioServiceImpl implements UsuarioService{
 
 
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-        public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public UsuarioServiceImpl(UsuarioRepository repo){
+        this.usuarioRepository = repo;
     }
 
     @Override
@@ -32,8 +34,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Optional<Usuario> getById(Long id) {
-        return Optional.ofNullable(usuarioRepository.findOne(id));
+    public Usuario getById(Long id) {
+        return (usuarioRepository.findOne(id));
     }
 
     @Override

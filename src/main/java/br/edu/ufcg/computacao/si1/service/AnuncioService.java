@@ -13,7 +13,7 @@ public interface AnuncioService {
 
     Anuncio create(AnuncioForm anuncio);
 
-    Optional<Anuncio> getById(Long id);
+    Anuncio getById(Long id);
 
     Collection<Anuncio> get(String tipo);
 

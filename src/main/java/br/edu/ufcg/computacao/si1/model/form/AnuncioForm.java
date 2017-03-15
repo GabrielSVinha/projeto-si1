@@ -24,6 +24,9 @@ public class AnuncioForm {
     @NotEmpty(message = "O criador do anuncio nao pode ser vazio.")
     private Long user;
 
+    public AnuncioForm() {
+    }
+
     public AnuncioForm(String titulo, Double preco, String tipo, Long user) {
         this.titulo = titulo;
         this.preco = preco;
@@ -64,6 +67,10 @@ public class AnuncioForm {
 
     public String getTipo() {
         return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }
 

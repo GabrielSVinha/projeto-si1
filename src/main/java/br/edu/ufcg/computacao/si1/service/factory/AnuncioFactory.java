@@ -6,7 +6,12 @@ import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioImovel;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioMovel;
 import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+import br.edu.ufcg.computacao.si1.service.AnuncioService;
+import br.edu.ufcg.computacao.si1.service.UsuarioService;
+import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -14,12 +19,14 @@ import java.util.Date;
 /**
  * Created by gabriel on 12/03/17.
  */
+@Component
 public class AnuncioFactory {
 
-    @Autowired
-    private static UsuarioRepository userRepo;
 
-    public static Anuncio create(AnuncioForm form){
+    @Autowired
+    private UsuarioRepository user;
+
+    public Anuncio create(AnuncioForm form){
         switch (form.getTipo()){
             case "movel":
                 return new AnuncioMovel(form.getTitulo(),
@@ -27,7 +34,7 @@ public class AnuncioFactory {
                                         form.getPreco(),
                                         null,
                                         "MOVEL",
-                                        userRepo.findOne(form.getUser()));
+                                        user.findOne(form.getUser()));
 
             case "imovel":
                 return new AnuncioImovel(form.getTitulo(),
@@ -35,15 +42,15 @@ public class AnuncioFactory {
                                          form.getPreco(),
                                          null,
                                          "IMOVEL",
-                                         userRepo.findOne(form.getUser()));
+                                         user.findOne(form.getUser()));
 
             case "emprego":
                 return new AnuncioEmprego(form.getTitulo(),
                                           new Date(),
                                           form.getPreco(),
-                                           null,
+                                          null,
                                           "EMPREGO",
-                                          userRepo.findOne(form.getUser()));
+                                          user.findOne(form.getUser())) ;
 
             default:
                 break;

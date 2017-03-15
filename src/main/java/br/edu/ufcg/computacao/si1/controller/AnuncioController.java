@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.controller;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
+import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,26 +38,17 @@ public class AnuncioController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Anuncio> deleteAnuncio(@PathVariable long id){
         if(anuncioService.delete(id)){
-            return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Anuncio>(HttpStatus.OK);
         }
-        return new ResponseEntity<Anuncio>(HttpStatus.OK);
+        return new ResponseEntity<Anuncio>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Anuncio> cadastroAnuncio(@RequestParam(required = true) String titulo,
-                                                   @RequestParam(required = true) String preco,
-                                                   @RequestParam(required = true) String tipo,
-                                                   @RequestParam("user_id") Long user_id){
-        AnuncioForm anuncioForm = new AnuncioForm(titulo.substring(1, titulo.length()-1),
-                                                  Double.parseDouble(preco),
-                                                  tipo.substring(1, tipo.length()-1),
-                                                  (long) user_id);
+        @RequestMapping(value = "/new", method = RequestMethod.POST)
+        public @ResponseBody ResponseEntity<Anuncio> cadastroAnuncio(@RequestBody AnuncioForm anuncioForm){
+            if(this.anuncioService.create(anuncioForm) == null){
+                return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);
+            }
 
-        if(this.anuncioService.create(anuncioForm) == null){
-            return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<Anuncio>(anuncioService.create(anuncioForm), HttpStatus.OK);
+            return new ResponseEntity<Anuncio>(HttpStatus.OK);
     }
 }
