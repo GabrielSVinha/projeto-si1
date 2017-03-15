@@ -11,18 +11,18 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria'])
                 url: '/',
                 templateUrl: '/views/home.html',
                 controller: 'HomeController',
-                controllerAs: 'home'
+                controllerAs: 'homeCtrl'
             })
             .state('register', {
                 url: '/cadastre-se',
                 templateUrl: '/views/register.html',
                 controller: 'RegisterController',
-                controllerAs: 'register'
+                controllerAs: 'registerCtrl'
             })
             .state('login', {
                 url: '/login',
                 templateUrl: '/views/login.html',
                 controller: 'LoginController',
-                controllerAs: 'login'
+                controllerAs: 'loginCtrl'
             });
     }]);
