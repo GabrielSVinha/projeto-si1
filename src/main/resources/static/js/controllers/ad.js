@@ -1,9 +1,12 @@
 (function() {
+    'use strict';
 
-	app.controller('AdController', AdController);
+    app.controller('AdController', AdController);
 
-	function AdController(){
-		var self = this;
-	};
+    AdController.$inject = [];
+
+    function AdController(){
+        var self = this;
+    };
 
 })();
