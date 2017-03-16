@@ -3,12 +3,12 @@
 
     app.controller('AdController', AdController);
 
-    AdController.$inject = [];
+    AdController.$inject = ['AdService'];
 
-    function AdController(){
+    function AdController(adService) {
         var self = this;
 
-        this.ads = [];
+        this.ads = adService.getAll();
     };
 
 })();
