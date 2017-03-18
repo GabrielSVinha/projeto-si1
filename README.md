@@ -1,9 +1,9 @@
 SI1 UFCG 2016.2: AD-EXTREME
 ===
 
-|Branch|Status|
-|---|---|
-|master|[![Build Status](https://travis-ci.org/GabrielSVinha/projeto-si1.svg?branch=master)](https://travis-ci.org/GabrielSVinha/projeto-si1)|
+|Status|Issues|License|
+|---|---|---|
+|[![Build Status](https://travis-ci.org/GabrielSVinha/projeto-si1.svg?branch=master)](https://travis-ci.org/GabrielSVinha/projeto-si1)|[![GitHub issues](https://img.shields.io/github/issues/GabrielSVinha/projeto-si1.svg)](https://github.com/GabrielSVinha/projeto-si1/issues)|[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GabrielSVinha/projeto-si1/master/LICENSE)|
 
 
 Esse repositório contém a implementação do projeto de conclusão da disciplina **Sistemas de Informação I**, período **2016.2**, Universidade Federal de Campina Grande.
