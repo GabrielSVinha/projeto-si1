@@ -1,0 +1,14 @@
+language: java
+jdk:
+  - oraclejdk8
+services:
+  - postgresql
+postgres:
+  adapter: postgresql
+  username: postgres
+  password: admin
+before_script:
+  - psql -U postgres template1 -c "alter user postgres with password 'admin'"
+  - psql -U postgres -c 'create database ad_extreme;'
+notifications:
+  slack: dreamteamsi1:3Ngf9fFmx8JOmxaA7GDwOdd6

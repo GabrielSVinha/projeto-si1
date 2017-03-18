@@ -1,0 +1,212 @@
+<navigation-bar></navigation-bar>
+
+<div class="col-md-offset-2 col-md-8">
+    <!-- form cadastro begin -->
+    <form class="form-horizontal" name="registerForm" novalidate>
+        <fieldset>
+            <legend>Cadastro</legend>
+            <!-- name begin -->
+            <div
+                class="form-group"
+                ng-class="{
+                    'has-error no-margin-bottom': registerForm.name.$invalid && registerForm.name.$touched
+                }"
+            >
+                <label class="col-md-4 control-label" for="name">Nome</label>
+                <div class="col-md-4">
+                    <input
+                        class="form-control input-md"
+                        name="name"
+                        placeholder="Nome"
+                        required
+                        ng-model="user.name"
+                    />
+
+                    <div
+                        class="help-block"
+                        ng-messages="registerForm.name.$error"
+                        ng-show="registerForm.name.$invalid && registerForm.name.$touched"
+                    >
+                        <div ng-message="required">
+                            Esse campo é obrigatório
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- name end -->
+
+            <!-- email begin -->
+            <div
+                class="form-group"
+                ng-class="{
+                    'has-error no-margin-bottom': registerForm.email.$invalid && registerForm.email.$touched
+                }"
+            >
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input
+                        id="email"
+                        class="form-control input-md"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        ng-model="user.email"
+                    />
+
+                    <div
+                        class="help-block"
+                        ng-messages="registerForm.email.$error"
+                        ng-show="registerForm.email.$invalid && registerForm.email.$touched"
+                    >
+                        <div ng-message="required">
+                            Esse campo é obrigatório
+                        </div>
+                        <div ng-message="email">
+                            E-mail inválido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- email end -->
+
+            <!-- password begin -->
+            <div
+                class="form-group"
+                ng-class="{
+                    'has-error no-margin-bottom': registerForm.password.$invalid && registerForm.password.$touched
+                }"
+            >
+                <label class="col-md-4 control-label" for="password">Senha</label>
+                <div class="col-md-4">
+                    <input
+                        id="password"
+                        class="form-control input-md"
+                        name="password"
+                        type="password"
+                        placeholder="Senha"
+                        minlength="4"
+                        maxlength="16"
+                        required
+                        ng-model="user.password"
+                    />
+
+                    <div
+                        class="help-block"
+                        ng-messages="registerForm.password.$error"
+                        ng-show="registerForm.password.$invalid && registerForm.password.$touched"
+                    >
+                        <div ng-message="required">
+                            Esse campo é obrigatório
+                        </div>
+                        <div ng-message="minlength">
+                            A senha precisa de no mínimo 4 digitos
+                        </div>
+                        <div ng-message="maxlength">
+                            A senha precisa de no máximo 16 digitos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- password end -->
+
+            <!-- confirmPassword begin -->
+            <div
+                class="form-group"
+                ng-class="{
+                    'has-error no-margin-bottom': registerForm.confirmPassword.$invalid && registerForm.confirmPassword.$touched
+                }"
+            >
+                <label class="col-md-4 control-label" for="confirmPassword">Confirmar Senha</label>
+                <div class="col-md-4">
+                    <input
+                        id="confirmPassword"
+                        class="form-control input-md"
+                        name="confirmPassword"
+                        type="password"
+                        placeholder="Confirmar Senha"
+                        minlength="4"
+                        maxlength="16"
+                        required
+                        confirm-password="user.password"
+                        ng-model="user.confirmPassword"
+                    />
+
+                    <div
+                        class="help-block"
+                        ng-messages="registerForm.confirmPassword.$error"
+                        ng-show="registerForm.confirmPassword.$invalid && registerForm.confirmPassword.$touched"
+                    >
+                        <div ng-message="required">
+                            Esse campo é obrigatório
+                        </div>
+                        <div ng-message="confirmPassword">
+                            As senhas não conferem
+                        </div>
+                        <div ng-message="minlength">
+                            A senha precisa de no mínimo 4 digitos
+                        </div>
+                        <div ng-message="maxlength">
+                            A senha precisa de no máximo 16 digitos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- confirmPassword end -->
+
+            <!-- socialReason begin -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Razão Social</label>
+                <div class="col-md-4">
+                    <!-- pessoa física -->
+                    <label class="radio-inline">
+                        <input
+                            type="radio"
+                            name="role"
+                            required
+                            ng-value="0"
+                            ng-model="user.role"
+                        />
+                        Pessoa Física
+                    </label>
+
+                    <!-- pessoa jurídica -->
+                    <label class="radio-inline">
+                        <input
+                            type="radio"
+                            name="role"
+                            required
+                            ng-value="1"
+                            ng-model="user.role"
+                        />
+                        Pessoa Jurídica
+                    </label>
+                </div>
+            </div>
+            <!-- socialReason end -->
+
+            <div class="form-group">
+                <div class="col-md-8 col-md-offset-4">
+                    <button
+                        class="btn btn-success"
+                        type="submit"
+                        ng-disabled="registerForm.$invalid"
+                        ng-click="registerCtrl.submitForm(user)"
+                    >
+                        Cadastrar-se
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        ng-click="registerCtrl.resetForm(user, registerForm)"
+                    >
+                        Limpar
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <!-- form cadastro end -->
+</div>
+
+<main-footer></main-footer>
