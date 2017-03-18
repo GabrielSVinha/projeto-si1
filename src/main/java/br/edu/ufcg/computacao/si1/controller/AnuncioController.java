@@ -25,14 +25,14 @@ public class AnuncioController {
     @Autowired
     private AnuncioServiceImpl anuncioService;
 
-    @RequestMapping(value = "/{user}", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Anuncio>> getUserAnuncio(@RequestParam String user){
-        return null;
-    }
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<Collection<Anuncio>> getAllAnuncios(){
         return new ResponseEntity<Collection<Anuncio>>(anuncioService.getAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{user}", method = RequestMethod.GET)
+    public ResponseEntity<Collection<Anuncio>> getUserAnuncios(@RequestParam String user){
+        return new ResponseEntity<Collection<Anuncio>>(anuncioService.getByUser(user), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)

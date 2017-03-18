@@ -89,4 +89,14 @@ public class AnuncioServiceImpl implements AnuncioService {
         }
         return false;
     }
+
+    @Override
+    public Collection<Anuncio> getByUser(String username) {
+        /*
+        aqui filtramos os anuncios pelo usuario
+         */
+        return anuncioRepository.findAll().stream()
+                .filter(anuncio -> anuncio.getUser().getUsername().equals(username))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 }
