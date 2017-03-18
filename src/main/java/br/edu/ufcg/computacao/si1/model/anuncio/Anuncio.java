@@ -41,7 +41,7 @@ public abstract class Anuncio {
     @Column(name = "user_id")
     private Long user_id;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Usuario owner;
 
