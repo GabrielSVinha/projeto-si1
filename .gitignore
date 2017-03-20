@@ -10,5 +10,5 @@ mvnw.cmd
 target/
 .project
 .metadata
-node_modules/
-src/main/resources/application.properties
+
+vendor/

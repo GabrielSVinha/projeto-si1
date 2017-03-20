@@ -1,0 +1,33 @@
+<navigation-bar></navigation-bar>
+
+<div class="col-md-offset-2 col-md-8">
+    <h1>Anúncios</h1>
+
+    <div class="table-responsive">
+        <table style="width:100%" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Tipo</th>
+                    <th>Postado</th>
+                    <th align="right">Preço</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="ad in adsCtrl.ads">
+                    <td>{{ :: ad.title }}</td>
+                    <td>{{ :: ad.type }}</td>
+                    <td>{{ :: ad.createdAt | date }}</td>
+                    <td align="center">{{ :: ad.price | currency }}</td>
+                </tr>
+
+                <tr ng-show="adsCtrl.ads.length === 0">
+                    <td>Não existem anúncios ainda</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<main-footer></main-footer>

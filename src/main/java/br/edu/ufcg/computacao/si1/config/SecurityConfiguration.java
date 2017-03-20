@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http
             .csrf().disable()
             .authorizeRequests()
-                    .antMatchers("/api/**").permitAll()
+                    .antMatchers("/", "/api/**", "/vendor/**", "/views/**").permitAll()
                     .anyRequest().permitAll()
                 .and()
             .formLogin()
@@ -64,10 +64,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select email as username,senha as password, true as enabled from tb_usuario where email=?")
-                .authoritiesByUsernameQuery(
-                        "select email as username, role from tb_usuario where email=?");
+            .usersByUsernameQuery(
+                "select email as username,senha as password, true as enabled from tb_usuario where email=?")
+            .authoritiesByUsernameQuery(
+                "select email as username, role from tb_usuario where email=?");
     }
 
 //    @Autowired
