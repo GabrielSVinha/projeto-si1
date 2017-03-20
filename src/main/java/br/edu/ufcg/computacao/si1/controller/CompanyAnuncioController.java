@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,6 @@ public class CompanyAnuncioController {
     public ModelAndView getPageCadastarAnuncio(AnuncioForm anuncioForm){
         ModelAndView model = new ModelAndView();
 
-        model.addObject("tipos", anuncioForm.getTipos());
         model.setViewName("company/cadastrar_anuncio");
 
         return model;
@@ -46,12 +45,7 @@ public class CompanyAnuncioController {
             return getPageCadastarAnuncio(anuncioForm);
         }
 
-        Anuncio anuncio = new Anuncio();
-        anuncio.setTitulo(anuncioForm.getTitulo());
-        anuncio.setPreco(anuncioForm.getPreco());
-        anuncio.setTipo(anuncioForm.getTipo());
-
-        anuncioService.create(anuncio);
+        anuncioService.create(anuncioForm);
 
         attributes.addFlashAttribute("mensagem", "Anúncio cadastrado com sucesso!");
         return new ModelAndView("redirect:/company/cadastrar/anuncio");

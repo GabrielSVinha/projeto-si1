@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import br.edu.ufcg.computacao.si1.model.Usuario;
+
 import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping(value = "/api/cadastro")
 public class CadastroController {
 
     @Autowired
@@ -29,7 +30,7 @@ public class CadastroController {
         return model;
     }
 
-    @RequestMapping(value = "/cadastrar-se", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ModelAndView cadastro(@Valid UsuarioForm usuarioForm, BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){
             return getPageCadastro(usuarioForm);

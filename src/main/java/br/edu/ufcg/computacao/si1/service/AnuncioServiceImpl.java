@@ -1,7 +1,9 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
+import br.edu.ufcg.computacao.si1.service.factory.AnuncioFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,10 @@ public class AnuncioServiceImpl implements AnuncioService {
     private AnuncioRepository anuncioRepository;
 
     @Autowired
+    private AnuncioFactory factory;
+
+    @Autowired
     public AnuncioServiceImpl(AnuncioRepository anuncioRepository) {
-        /*neste codigo apenas atribuimos o repositorio jpa ao atributo */
         this.anuncioRepository = anuncioRepository;
     }
 
@@ -29,16 +33,22 @@ public class AnuncioServiceImpl implements AnuncioService {
         return this.anuncioRepository;
     }
 
+    public Collection<Anuncio> getAnunciosDoUsuario(){return null;}
+
     @Override
-    public Anuncio create(Anuncio anuncio) {
-        /*aqui salvamos o anuncio recem criado no repositorio jpa*/
-        return anuncioRepository.save(anuncio);
+    public Anuncio create(AnuncioForm form) {
+        Anuncio anuncio = factory.create(form);
+        if(anuncio != null){
+            anuncioRepository.save(anuncio);
+            return anuncio;
+        }
+        return null;
     }
 
     @Override
-    public Optional<Anuncio> getById(Long id) {
+    public Anuncio getById(Long id) {
         /*aqui recuperamos o anuncio pelo seu id*/
-        return Optional.ofNullable(anuncioRepository.findOne(id));
+        return anuncioRepository.findOne(id);
     }
 
     @Override
@@ -78,5 +88,15 @@ public class AnuncioServiceImpl implements AnuncioService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Collection<Anuncio> getByUser(String username) {
+        /*
+        aqui filtramos os anuncios pelo usuario
+         */
+        return anuncioRepository.findAll().stream()
+                .filter(anuncio -> anuncio.getUser().getUsername().equals(username))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

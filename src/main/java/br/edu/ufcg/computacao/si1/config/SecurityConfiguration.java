@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.config;
 
-import br.edu.ufcg.computacao.si1.model.Usuario;
+
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -30,10 +31,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .csrf().disable()
             .authorizeRequests()
-                    .antMatchers("/", "/cadastrar-se", "/vendor/**", "/views/**").permitAll()
-                    .antMatchers("/user/**").hasAuthority("USER")
-                    .antMatchers("/company/**").hasAuthority("COMPANY")
+                    .antMatchers("/", "/api/**", "/vendor/**", "/views/**").permitAll()
                     .anyRequest().permitAll()
                 .and()
             .formLogin()

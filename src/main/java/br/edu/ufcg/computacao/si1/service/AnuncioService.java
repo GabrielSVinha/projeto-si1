@@ -1,6 +1,8 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -10,13 +12,15 @@ import java.util.Optional;
  */
 public interface AnuncioService {
 
-    Anuncio create(Anuncio anuncio);
+    Anuncio create(AnuncioForm anuncio);
 
-    Optional<Anuncio> getById(Long id);
+    Anuncio getById(Long id);
 
     Collection<Anuncio> get(String tipo);
 
     Collection<Anuncio> getAll();
+
+    Collection<Anuncio> getByUser(String username);
 
     boolean update(Anuncio anuncio);
 

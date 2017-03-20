@@ -20,6 +20,15 @@ public class UsuarioForm {
     @NotNull
     private Integer role;
 
+    public UsuarioForm() {}
+
+    public UsuarioForm(String nome, String email, String senha, Integer role) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.role = role;
+    }
+
     public String getNome() {
         return nome;
     }

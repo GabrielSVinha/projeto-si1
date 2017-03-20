@@ -1,19 +1,20 @@
-package br.edu.ufcg.computacao.si1.model;
+package br.edu.ufcg.computacao.si1.model.anuncio;
+
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import com.sun.javafx.runtime.SystemProperties;
 
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LongSummaryStatistics;
 
 /**
  * Created by Marcus Oliveira on 08/12/16.
  */
 @Entity
-@Table(name="tb_anuncio")
-public class Anuncio {
-
-    private static final String[] tipos = new String[] {"movel", "imovel", "emprego"};
-
+@Table(name="anuncios")
+public abstract class Anuncio {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
@@ -37,12 +38,21 @@ public class Anuncio {
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double preco, String nota, String tipo) {
+    @Column(name = "user_id")
+    private Long user_id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private Usuario owner;
+
+    public Anuncio(String titulo, Date dataDeCriacao, double preco, String nota, String tipo, Usuario owner) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.preco = preco;
         this.nota = nota;
         this.tipo = tipo;
+        this.owner = owner;
+        this.user_id = owner.getUser_id();
     }
 
     public Anuncio() {
@@ -108,6 +118,14 @@ public class Anuncio {
         this.tipo = tipo;
     }
 
+    public Usuario getUser() {
+        return owner;
+    }
+
+    public void setUser(Usuario user) {
+        this.owner = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -140,13 +158,14 @@ public class Anuncio {
 
     @Override
     public String toString() {
-        return "Anuncio{" +
-                "_id=" + _id +
-                ", titulo='" + titulo + '\'' +
-                ", dataDeCriacao=" + getDataDeCriacao() +
-                ", preco=" + preco +
-                ", nota=" + nota +
-                ", tipo='" + tipo + '\'' +
+        return "{" + " \n"+
+                "\t_id:" + _id +", "+ System.lineSeparator() +
+                "\ttitulo:'" + titulo + ", "+ System.lineSeparator() +
+                "\tdataDeCriacao:" + getDataDeCriacao() +", "+ System.lineSeparator() +
+                "\tpreco:" + preco +", "+ System.lineSeparator() +
+                "\tnota:" + nota +", "+ System.lineSeparator() +
+                "\ttipo:'" + tipo + ", "+ System.lineSeparator() +
+                "\tuser_id:" +owner.getUser_id()+", "+ System.lineSeparator() +
                 '}';
     }
 }
