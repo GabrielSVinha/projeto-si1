@@ -13,64 +13,67 @@ public class AnuncioForm {
     @NotNull(message = "O titulo não pode ser nulo.")
     @NotEmpty(message = "O titulo não pode esta vazio.")
     @Size(min = 10, max = 100, message = "O titulo deve ter entre 2 e 100 caracters")
-    private String titulo;
+    private String title;
+
     @NotNull(message = "O preço não pode ser nulo.")
     @DecimalMin(value = "0.1", message = "O preço minimo é 0.1 para um anúncio.")
-    private Double preco;
+    private Double price;
+
     @NotNull(message = "O tipo de anúncio não pode ser nulo.")
     @NotEmpty(message = "Escolha um tipo para o anúncio.")
-    private String tipo;
+    private String type;
+
     @NotNull(message = "O criador do anuncio nao pode ser nulo.")
     @NotEmpty(message = "O criador do anuncio nao pode ser vazio.")
-    private Long user;
+    private Long user_id;
 
     public AnuncioForm() {
     }
 
-    public AnuncioForm(String titulo, Double preco, String tipo, Long user) {
-        this.titulo = titulo;
-        this.preco = preco;
-        this.tipo = tipo;
-        this.user = user;
+    public AnuncioForm(String title, Double price, String type, Long user_id) {
+        this.title = title;
+        this.price = price;
+        this.type = type;
+        this.user_id = user_id;
     }
 
     public AnuncioForm(Anuncio anuncio){
-        this.titulo = anuncio.getTitulo();
-        this.preco = anuncio.getPreco();
-        this.tipo = anuncio.getTipo();
-        this.user = anuncio.getUser().getUser_id();
+        this.title = anuncio.getTitle();
+        this.price = anuncio.getPrice();
+        this.type = anuncio.getType();
+        this.user_id = anuncio.getUser().getId();
     }
 
-    public Long getUser() {
-        return user;
+    public Long getUserId() {
+        return user_id;
     }
 
-    public void setUser(Long user) {
-        this.user = user;
+    public void setUser(Long user_id) {
+        this.user_id = user_id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Double getPreco() {
-        return preco;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 }
 

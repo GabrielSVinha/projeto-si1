@@ -12,8 +12,8 @@ public class UsuarioEmpresa extends Usuario {
         super();
     }
 
-    public  UsuarioEmpresa(String nome, String email, String senha){
-        super(nome, email, senha, "COMPANY");
+    public  UsuarioEmpresa(String name, String email, String password){
+        super(name, email, password, "COMPANY");
     }
 
 }
