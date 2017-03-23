@@ -35,7 +35,7 @@ public class AnuncioController {
         return new ResponseEntity<Collection<Anuncio>>(anuncioService.getByUser(user), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Anuncio> deleteAnuncio(@PathVariable long id){
         if(anuncioService.delete(id)){
             return new ResponseEntity<Anuncio>(HttpStatus.OK);
@@ -43,7 +43,7 @@ public class AnuncioController {
         return new ResponseEntity<Anuncio>(HttpStatus.NOT_FOUND);
     }
 
-        @RequestMapping(value = "/new", method = RequestMethod.POST)
+        @RequestMapping(value = "/", method = RequestMethod.POST)
         public @ResponseBody ResponseEntity<Anuncio> cadastroAnuncio(@RequestBody AnuncioForm anuncioForm){
             if(this.anuncioService.create(anuncioForm) == null){
                 return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);

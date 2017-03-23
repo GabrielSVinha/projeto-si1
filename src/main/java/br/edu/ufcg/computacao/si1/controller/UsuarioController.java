@@ -27,7 +27,7 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(usuarioService.getById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody UsuarioForm usuarioForm) {
 
         if (this.usuarioService.create(usuarioForm) == null)
@@ -36,7 +36,7 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Usuario> deleteUsuario(@PathVariable long id){
         if(usuarioService.delete(id)){
             return new ResponseEntity<Usuario>(HttpStatus.OK);
