@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.model.user.User;
 
 @Entity(name = "Token")
 @Table(name = "token")
@@ -22,7 +22,7 @@ public class Token {
     private String tokenKey;
 
     @OneToOne
-    private Usuario user;
+    private User user;
 
     public Long getId() {
         return this.id;
@@ -40,11 +40,11 @@ public class Token {
         this.tokenKey = key;
     }
 
-    public Usuario getUser() {
+    public User getUser() {
         return this.user;
     }
 
-    public void setUser(Usuario user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

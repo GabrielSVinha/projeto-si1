@@ -1,9 +1,8 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioEmpresa;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioPessoa;
-import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+import br.edu.ufcg.computacao.si1.model.user.User;
+import br.edu.ufcg.computacao.si1.model.user.UserType;
+import br.edu.ufcg.computacao.si1.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,22 +18,19 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
-/**
- * Created by gabriel on 08/03/17.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UsuarioTest {
 
     @Autowired
-    private UsuarioRepository repo;
+    private UserRepository repo;
 
-    private Usuario user1, user2;
+    private User user1, user2;
 
     @Before
     public void setUp() {
-        this.user1 = new UsuarioEmpresa("Belzebu", "sata@hell.com", "fire");
-        this.user2 = new UsuarioPessoa("Gretchen", "gretchen@conga.com", "calabok");
+        this.user1 = new User("Belzebu", "sata@hell.com", "fire", UserType.INDIVIDUAL);
+        this.user2 = new User("Gretchen", "gretchen@conga.com", "calabok", UserType.INDIVIDUAL);
     }
 
     @Test

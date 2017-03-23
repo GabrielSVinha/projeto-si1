@@ -1,18 +1,15 @@
-package br.edu.ufcg.computacao.si1.model.anuncio;
+package br.edu.ufcg.computacao.si1.model.ad;
 
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.model.user.User;
 
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Marcus Oliveira on 08/12/16.
- */
 @Entity
 @Table(name="anuncios")
-public abstract class Anuncio {
+public abstract class Ad {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
@@ -36,24 +33,24 @@ public abstract class Anuncio {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "user_id")
-    private Long user_id;
+    @Column(name = "userId")
+    private Long userId;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private Usuario owner;
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    private User owner;
 
-    public Anuncio(String title, Date creationDate, double price, String note, String type, Usuario owner) {
+    public Ad(String title, Date creationDate, double price, String note, String type, User owner) {
         this.title = title;
         this.creationDate = creationDate;
         this.price = price;
         this.note = note;
         this.type = type;
         this.owner = owner;
-        this.user_id = owner.getId();
+        this.userId = owner.getId();
     }
 
-    public Anuncio() {
+    public Ad() {
         title = "";
         creationDate = new Date();
         price = 0;
@@ -116,20 +113,20 @@ public abstract class Anuncio {
         this.type = type;
     }
 
-    public Usuario getUser() {
+    public User getUser() {
         return owner;
     }
 
-    public void setUser(Usuario user) {
+    public void setUser(User user) {
         this.owner = user;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Anuncio)) return false;
+        if (!(o instanceof Ad)) return false;
 
-        Anuncio anuncio = (Anuncio) o;
+        Ad anuncio = (Ad) o;
 
         if (Double.compare(anuncio.getPrice(), getPrice()) != 0) return false;
         if (!getId().equals(anuncio.getId())) return false;
@@ -163,7 +160,7 @@ public abstract class Anuncio {
                 "\tprice:" + price +", "+ System.lineSeparator() +
                 "\tnote:" + note +", "+ System.lineSeparator() +
                 "\ttype:'" + type + ", "+ System.lineSeparator() +
-                "\tuser_id:" +owner.getId()+", "+ System.lineSeparator() +
+                "\tuserId:" +owner.getId()+", "+ System.lineSeparator() +
                 '}';
     }
 }

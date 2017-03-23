@@ -1,10 +1,5 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioEmpresa;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioPessoa;
-import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

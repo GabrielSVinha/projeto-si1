@@ -1,14 +1,13 @@
 package br.edu.ufcg.computacao.si1.model.form;
 
-
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.ad.Ad;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AnuncioForm {
+public class AdForm {
 
     @NotNull(message = "O titulo não pode ser nulo.")
     @NotEmpty(message = "O titulo não pode esta vazio.")
@@ -25,31 +24,31 @@ public class AnuncioForm {
 
     @NotNull(message = "O criador do anuncio nao pode ser nulo.")
     @NotEmpty(message = "O criador do anuncio nao pode ser vazio.")
-    private Long user_id;
+    private Long userId;
 
-    public AnuncioForm() {
+    public AdForm() {
     }
 
-    public AnuncioForm(String title, Double price, String type, Long user_id) {
+    public AdForm(String title, Double price, String type, Long userId) {
         this.title = title;
         this.price = price;
         this.type = type;
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
-    public AnuncioForm(Anuncio anuncio){
+    public AdForm(Ad anuncio){
         this.title = anuncio.getTitle();
         this.price = anuncio.getPrice();
         this.type = anuncio.getType();
-        this.user_id = anuncio.getUser().getId();
+        this.userId = anuncio.getUser().getId();
     }
 
     public Long getUserId() {
-        return user_id;
+        return userId;
     }
 
-    public void setUser(Long user_id) {
-        this.user_id = user_id;
+    public void setUser(Long userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {

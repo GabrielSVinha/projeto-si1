@@ -1,14 +1,15 @@
-package br.edu.ufcg.computacao.si1.model.usuario;
+package br.edu.ufcg.computacao.si1.model.user;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.ad.Ad;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity(name = "Usuario")
-@Table(name = "usuarios")
-public abstract class Usuario extends org.springframework.security.core.userdetails.User{
+@Entity(name = "User")
+@Table(name = "users")
+public class User extends org.springframework.security.core.userdetails.User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,23 +24,19 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
     private String password;
 
     @Column
-    private String role;
+    private UserType type;
 
-    @OneToMany(mappedBy = "owner", targetEntity = Anuncio.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", targetEntity = Ad.class, cascade = CascadeType.ALL)
     @Column
-    private Collection<Anuncio> anuncios;
+    private Collection<Ad> anuncios;
 
-    public Usuario() {
-        super("default", "default", AuthorityUtils.createAuthorityList("USER"));
-    }
-
-    public Usuario(String name, String email, String password, String role) {
-        super(email, password, AuthorityUtils.createAuthorityList(role));
+    public User(String name, String email, String password, UserType type) {
+        super(name, password, AuthorityUtils.createAuthorityList(type.toString()));
 
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.type = type;
     }
 
     public Long getId() {
@@ -74,12 +71,12 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public UserType getType() {
+        return type;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setType(UserType type) {
+        this.type = type;
     }
 
 }

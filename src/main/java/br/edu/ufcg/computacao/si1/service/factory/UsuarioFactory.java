@@ -1,25 +1,20 @@
 package br.edu.ufcg.computacao.si1.service.factory;
 
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioEmpresa;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioPessoa;
+import br.edu.ufcg.computacao.si1.model.form.UserForm;
+import br.edu.ufcg.computacao.si1.model.user.User;
+import br.edu.ufcg.computacao.si1.model.user.UserType;
 
-/**
- * Created by user on 09/03/17.
- */
 public class UsuarioFactory {
 
-    public static Usuario create(UsuarioForm form){
+    public static User create(UserForm form){
+        User user = null;
 
-        Usuario user = null;
-
-        switch (form.getRole()){
-            case 1:
-                user = new UsuarioPessoa(form.getName(), form.getEmail(), form.getPassword());
+        switch (form.getType()){
+            case COMPANY:
+                user = new User(form.getName(), form.getEmail(), form.getPassword(), UserType.COMPANY);
                 break;
-            case 2:
-                user = new UsuarioEmpresa(form.getName(), form.getEmail(), form.getPassword());
+            case INDIVIDUAL:
+                user = new User(form.getName(), form.getEmail(), form.getPassword(), UserType.INDIVIDUAL);
                 break;
         }
         return user;

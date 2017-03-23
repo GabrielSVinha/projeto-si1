@@ -1,35 +1,27 @@
 package br.edu.ufcg.computacao.si1.service.factory;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioEmprego;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioImovel;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioMovel;
-import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
-import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
-import br.edu.ufcg.computacao.si1.service.AnuncioService;
-import br.edu.ufcg.computacao.si1.service.UsuarioService;
-import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
+import br.edu.ufcg.computacao.si1.model.ad.Ad;
+import br.edu.ufcg.computacao.si1.model.ad.AdFurniture;
+import br.edu.ufcg.computacao.si1.model.ad.AdJob;
+import br.edu.ufcg.computacao.si1.model.ad.AdRealty;
+import br.edu.ufcg.computacao.si1.model.form.AdForm;
+import br.edu.ufcg.computacao.si1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.Date;
 
-/**
- * Created by gabriel on 12/03/17.
- */
 @Component
 public class AnuncioFactory {
 
 
     @Autowired
-    private UsuarioRepository user;
+    private UserRepository user;
 
-    public Anuncio create(AnuncioForm form){
+    public Ad create(AdForm form){
         switch (form.getType()){
             case "movel":
-                return new AnuncioMovel(form.getTitle(),
+                return new AdFurniture(form.getTitle(),
                                         new Date(),
                                         form.getPrice(),
                                         null,
@@ -37,7 +29,7 @@ public class AnuncioFactory {
                                         user.findOne(form.getUserId()));
 
             case "imovel":
-                return new AnuncioImovel(form.getTitle(),
+                return new AdRealty(form.getTitle(),
                                          new Date(),
                                          form.getPrice(),
                                          null,
@@ -45,7 +37,7 @@ public class AnuncioFactory {
                                          user.findOne(form.getUserId()));
 
             case "emprego":
-                return new AnuncioEmprego(form.getTitle(),
+                return new AdJob(form.getTitle(),
                                           new Date(),
                                           form.getPrice(),
                                           null,

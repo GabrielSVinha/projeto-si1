@@ -2,10 +2,13 @@ package br.edu.ufcg.computacao.si1.model.form;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import br.edu.ufcg.computacao.si1.model.user.UserType;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class UsuarioForm {
+public class UserForm {
     @NotNull(message = "O nome não pode ser nulo.")
     @NotEmpty(message = "O nome não pode ser vazio.")
     @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.")
@@ -21,15 +24,16 @@ public class UsuarioForm {
     private String password;
 
     @NotNull
-    private Integer role;
+    private UserType type;
 
-    public UsuarioForm() {}
+    public UserForm() {
+    }
 
-    public UsuarioForm(String name, String email, String password, Integer role) {
+    public UserForm(String name, String email, String password, UserType type) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.type = type;
     }
 
     public String getName() {
@@ -56,11 +60,11 @@ public class UsuarioForm {
         this.password = password;
     }
 
-    public Integer getRole() {
-        return role;
+    public UserType getType() {
+        return type;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setType(UserType type) {
+        this.type = type;
     }
 }
