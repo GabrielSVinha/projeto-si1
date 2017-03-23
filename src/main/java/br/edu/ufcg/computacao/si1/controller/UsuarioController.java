@@ -29,18 +29,19 @@ public class UsuarioController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Usuario> cadastroUsuario(@RequestBody UsuarioForm usuarioForm) {
-
-        if (this.usuarioService.create(usuarioForm) == null)
+        if (this.usuarioService.create(usuarioForm) == null) {
             return new ResponseEntity<Usuario>(HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<Usuario>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Usuario> deleteUsuario(@PathVariable long id){
-        if(usuarioService.delete(id)){
+    public ResponseEntity<Usuario> deleteUsuario(@PathVariable long id) {
+        if (usuarioService.delete(id)) {
             return new ResponseEntity<Usuario>(HttpStatus.OK);
         }
+
         return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
     }
 }
