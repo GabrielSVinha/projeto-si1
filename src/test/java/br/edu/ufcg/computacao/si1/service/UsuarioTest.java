@@ -20,22 +20,27 @@ import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
 /**
-* Created by gabriel on 08/03/17.
-*/
+ * Created by gabriel on 08/03/17.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UsuarioTest {
 
-   @Autowired
-   private UsuarioRepository repo;
+    @Autowired
+    private UsuarioRepository repo;
 
-   private Usuario user1, user2;
+    private Usuario user1, user2;
 
-   @Before
-   public void setUp(){
-       this.user1 = new UsuarioEmpresa("Belzebu", "sata@hell.com", "fire");
-       this.user2 = new UsuarioPessoa("Gretchen", "gretchen@conga.com", "calabok");
-   }
+    @Before
+    public void setUp() {
+        this.user1 = new UsuarioEmpresa("Belzebu", "sata@hell.com", "fire");
+        this.user2 = new UsuarioPessoa("Gretchen", "gretchen@conga.com", "calabok");
+    }
+
+    @Test
+    public void test() {
+        assertTrue(true);
+    }
 
 //    @After
 //    public void tearDown() {

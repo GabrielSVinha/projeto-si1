@@ -23,11 +23,16 @@ import java.util.Date;
 import static junit.framework.TestCase.*;
 
 /**
-* Created by Marcus Oliveira on 28/12/16.
-*/
+ * Created by Marcus Oliveira on 28/12/16.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AnuncioServiceTest {
+
+    @Test
+    public void teste() {
+        assertTrue(true);
+    }
 
     // @Autowired
     // private AnuncioService anuncioService;

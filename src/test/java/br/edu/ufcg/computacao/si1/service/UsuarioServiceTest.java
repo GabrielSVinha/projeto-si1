@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
 * Created by gabriel on 09/03/17.
@@ -22,6 +23,11 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UsuarioServiceTest {
+
+    @Test
+    public void teste() {
+        assertTrue(true);
+    }
 
 //    @Autowired
 //    private UsuarioRepository userRepository;
