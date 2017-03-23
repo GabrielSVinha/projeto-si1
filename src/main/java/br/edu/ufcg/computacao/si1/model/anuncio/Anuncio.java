@@ -1,13 +1,11 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import com.sun.javafx.runtime.SystemProperties;
 
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LongSummaryStatistics;
 
 /**
  * Created by Marcus Oliveira on 08/12/16.
@@ -20,23 +18,23 @@ public abstract class Anuncio {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "_id", nullable = false, unique = true)
-    private Long _id;
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
 
-    @Column(name = "titulo", nullable = false)
-    private String titulo;
+    @Column(name = "title", nullable = false)
+    private String title;
 
-    @Column(name = "data_criacao", nullable = false)
-    private Date dataDeCriacao;
+    @Column(name = "creation_date", nullable = false)
+    private Date creationDate;
 
-    @Column(name = "preco", nullable = false)
-    private double preco;
+    @Column(name = "price", nullable = false)
+    private double price;
 
-    @Column(name = "nota")
-    private String nota;
+    @Column(name = "note")
+    private String note;
 
-    @Column(name = "tipo", nullable = false)
-    private String tipo;
+    @Column(name = "type", nullable = false)
+    private String type;
 
     @Column(name = "user_id")
     private Long user_id;
@@ -45,77 +43,77 @@ public abstract class Anuncio {
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Usuario owner;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double preco, String nota, String tipo, Usuario owner) {
-        this.titulo = titulo;
-        this.dataDeCriacao = dataDeCriacao;
-        this.preco = preco;
-        this.nota = nota;
-        this.tipo = tipo;
+    public Anuncio(String title, Date creationDate, double price, String note, String type, Usuario owner) {
+        this.title = title;
+        this.creationDate = creationDate;
+        this.price = price;
+        this.note = note;
+        this.type = type;
         this.owner = owner;
-        this.user_id = owner.getUser_id();
+        this.user_id = owner.getId();
     }
 
     public Anuncio() {
-        titulo = "";
-        dataDeCriacao = new Date();
-        preco = 0;
-        nota = "";
-        tipo = "";
+        title = "";
+        creationDate = new Date();
+        price = 0;
+        note = "";
+        type = "";
     }
 
     /**
      * Retorna o id do anuncio
      * @return o id do anuncio
      */
-    public Long get_id() {
-        return _id;
+    public Long getId() {
+        return id;
     }
 
     /**
      * Modifica o id do anuncio
-     * @param _id id a ser colocado no anuncio
-     */public void set_id(Long _id) {
-        this._id = _id;
+     * @param id id a ser colocado no anuncio
+     */public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDataDeCriacao() {
-        return DATE_FORMAT.format(dataDeCriacao);
+    public String getCreationDate() {
+        return DATE_FORMAT.format(creationDate);
     }
 
-    public void setDataDeCriacao(Date dataDeCriacao) {
-        this.dataDeCriacao = dataDeCriacao;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getPrice() {
+        return price;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public String getNota() {
-        return nota;
+    public String getNote() {
+        return note;
     }
 
-    public void setNota(String nota) {
-        this.nota = nota;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Usuario getUser() {
@@ -133,12 +131,12 @@ public abstract class Anuncio {
 
         Anuncio anuncio = (Anuncio) o;
 
-        if (Double.compare(anuncio.getPreco(), getPreco()) != 0) return false;
-        if (!get_id().equals(anuncio.get_id())) return false;
-        if (!getTitulo().equals(anuncio.getTitulo())) return false;
-        if (!getDataDeCriacao().equals(anuncio.getDataDeCriacao())) return false;
-        if (getNota() != null ? !getNota().equals(anuncio.getNota()) : anuncio.getNota() != null) return false;
-        return getTipo().equals(anuncio.getTipo());
+        if (Double.compare(anuncio.getPrice(), getPrice()) != 0) return false;
+        if (!getId().equals(anuncio.getId())) return false;
+        if (!getTitle().equals(anuncio.getTitle())) return false;
+        if (!getCreationDate().equals(anuncio.getCreationDate())) return false;
+        if (getNote() != null ? !getNote().equals(anuncio.getNote()) : anuncio.getNote() != null) return false;
+        return getType().equals(anuncio.getType());
 
     }
 
@@ -146,26 +144,26 @@ public abstract class Anuncio {
     public int hashCode() {
         int result;
         long temp;
-        result = get_id().hashCode();
-        result = 31 * result + getTitulo().hashCode();
-        result = 31 * result + getDataDeCriacao().hashCode();
-        temp = Double.doubleToLongBits(getPreco());
+        result = getId().hashCode();
+        result = 31 * result + getTitle().hashCode();
+        result = 31 * result + getCreationDate().hashCode();
+        temp = Double.doubleToLongBits(getPrice());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (getNota() != null ? getNota().hashCode() : 0);
-        result = 31 * result + getTipo().hashCode();
+        result = 31 * result + (getNote() != null ? getNote().hashCode() : 0);
+        result = 31 * result + getType().hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "{" + " \n"+
-                "\t_id:" + _id +", "+ System.lineSeparator() +
-                "\ttitulo:'" + titulo + ", "+ System.lineSeparator() +
-                "\tdataDeCriacao:" + getDataDeCriacao() +", "+ System.lineSeparator() +
-                "\tpreco:" + preco +", "+ System.lineSeparator() +
-                "\tnota:" + nota +", "+ System.lineSeparator() +
-                "\ttipo:'" + tipo + ", "+ System.lineSeparator() +
-                "\tuser_id:" +owner.getUser_id()+", "+ System.lineSeparator() +
+                "\tid:" + id +", "+ System.lineSeparator() +
+                "\ttitle:'" + title + ", "+ System.lineSeparator() +
+                "\tcreationDate:" + getCreationDate() +", "+ System.lineSeparator() +
+                "\tprice:" + price +", "+ System.lineSeparator() +
+                "\tnote:" + note +", "+ System.lineSeparator() +
+                "\ttype:'" + type + ", "+ System.lineSeparator() +
+                "\tuser_id:" +owner.getId()+", "+ System.lineSeparator() +
                 '}';
     }
 }

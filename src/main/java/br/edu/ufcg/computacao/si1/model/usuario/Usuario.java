@@ -11,13 +11,14 @@ import java.util.Collection;
 public abstract class Usuario extends org.springframework.security.core.userdetails.User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long user_id;
+    private Long id;
+
     @Column
-    private String nome;
+    private String name;
     @Column(unique = true)
     private String email;
     @Column
-    private String senha;
+    private String password;
     @Column
     private String role;
 
@@ -29,30 +30,29 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
         super("default", "default", AuthorityUtils.createAuthorityList("USER"));
     }
 
-    public Usuario(String nome, String email, String senha, String role) {
+    public Usuario(String name, String email, String password, String role) {
+        super(email, password, AuthorityUtils.createAuthorityList(role));
 
-        super(email, senha, AuthorityUtils.createAuthorityList(role));
-
-        this.nome = nome;
+        this.name = name;
         this.email = email;
-        this.senha = senha;
+        this.password = password;
         this.role = role;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getN() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setN(String n) {
-        this.nome = n;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -63,20 +63,20 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getR() {
+    public String getRole() {
         return role;
     }
 
-    public void setR(String r) {
-        this.role = r;
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }
