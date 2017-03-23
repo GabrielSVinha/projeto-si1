@@ -15,10 +15,13 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
 
     @Column
     private String name;
+
     @Column(unique = true)
     private String email;
+
     @Column
     private String password;
+
     @Column
     private String role;
 
