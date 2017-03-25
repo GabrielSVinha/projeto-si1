@@ -10,10 +10,11 @@
 
         this.submit = function(user) {
             UserService.login(user)
-                .then(function(token) {
-                    if (token !== null) {
-                        $state.go('profile');
-                    }
+                .then(function(user) {
+                    $state.go('profile');
+                })
+                .catch(function() {
+                    // ops..
                 });
         };
     }

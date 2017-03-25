@@ -45,7 +45,7 @@
                 .then(response => response.data)
                 .then(function(response) {
                     $cookies.put('token', response.tokenKey);
-                    return response;
+                    return self.getUser();
                 })
                 .catch(function() {
                     return null;
