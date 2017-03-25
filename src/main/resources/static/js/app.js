@@ -1,4 +1,4 @@
-var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria'])
+var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ngCookies'])
     .config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider) {
         $locationProvider.html5Mode(true);
 
@@ -10,8 +10,10 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria'])
             .state('app', {
                 abstract: true,
                 resolve: {
-                    user: [function() {
-
+                    user: ['UserService', function(UserService) {
+                        return UserService
+                            .getUser()
+                            .catch(() => ({}));
                     }]
                 },
                 template: '<div data-ui-view></div>'
