@@ -17,7 +17,7 @@ public interface AdService {
 
     Collection<Ad> getAll();
 
-    Collection<Ad> getByUser(String username);
+    Collection<Ad> getByUsername(String username);
 
     boolean update(Ad ad);
 

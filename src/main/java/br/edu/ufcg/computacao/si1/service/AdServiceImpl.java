@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-/**
- * Created by Marcus Oliveira on 28/12/16.
- */
 @Service
 public class AdServiceImpl implements AdService {
 
@@ -26,23 +23,22 @@ public class AdServiceImpl implements AdService {
     @Autowired
     private AdFactory factory;
 
-    public Collection<Ad> getAnunciosDoUsuario() {
-        return null;
+    public Collection<Ad> getAdsFromUser(User user) {
+        return adRepository.findByOwner(user);
     }
 
     @Override
     public Ad create(AdForm form) {
-        Ad anuncio = factory.create(form);
-        if (anuncio != null) {
-            adRepository.save(anuncio);
-            return anuncio;
+        Ad ad = factory.create(form);
+        if (ad != null) {
+            adRepository.save(ad);
+            return ad;
         }
         return null;
     }
 
     @Override
     public Ad getById(Long id) {
-        /*aqui recuperamos o anuncio pelo seu id*/
         return adRepository.findOne(id);
     }
 
@@ -75,7 +71,7 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Collection<Ad> getByUser(String username) {
+    public Collection<Ad> getByUsername(String username) {
         User user = userRepository.findByName(username);
 
         return adRepository.findByOwner(user);

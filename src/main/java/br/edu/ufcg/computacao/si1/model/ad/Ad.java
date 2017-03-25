@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name="anuncios")
+@Table(name="ads")
 public class Ad {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -33,11 +33,11 @@ public class Ad {
     @Column(name = "type", nullable = false)
     private AdType type;
 
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private Long userId;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User owner;
 
     public Ad(String title, Date creationDate, double price, String note, AdType type, User owner) {

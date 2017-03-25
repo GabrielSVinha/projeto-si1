@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/api/anuncios")
+@RequestMapping(value = "/api/ad")
 public class AdController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class AdController {
 
     @RequestMapping(value = "/{user}", method = RequestMethod.GET)
     public ResponseEntity<Collection<Ad>> getUserAds(@RequestParam String user) {
-        return new ResponseEntity<Collection<Ad>>(adService.getByUser(user), HttpStatus.OK);
+        return new ResponseEntity<Collection<Ad>>(adService.getByUsername(user), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
