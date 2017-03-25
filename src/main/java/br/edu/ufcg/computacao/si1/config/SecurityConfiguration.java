@@ -32,19 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             .csrf().disable()
             .authorizeRequests()
                     .antMatchers("/", "/api/**", "/vendor/**", "/views/**").permitAll()
-                    .anyRequest().permitAll()
-                .and()
-            .formLogin()
-                    .loginPage("/login").permitAll()
-                    .successHandler(new CustomAuthenticationSuccessHandler())
-                    .failureUrl("/login?error")
-                .and()
-            .logout()
-                    .logoutUrl("/logout")
-                    .deleteCookies("remember-me","JSESSIONID")
-                    .logoutSuccessUrl("/login").permitAll()
-                .and()
-                    .rememberMe();
+                    .anyRequest().permitAll();
     }
 
     /**
@@ -63,9 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
         auth.jdbcAuthentication().dataSource(dataSource)
             .usersByUsernameQuery(
-                "select email as username,senha as password, true as enabled from tb_usuario where email=?")
+                "select email as username, password, true as enabled from user where email=?")
             .authoritiesByUsernameQuery(
-                "select email as username, role from tb_usuario where email=?");
+                "select email as username, type from user where email=?");
     }
 
 //    @Autowired
