@@ -39,6 +39,10 @@ public class User extends org.springframework.security.core.userdetails.User {
         this.type = type;
     }
 
+    public User() {
+        super("default", "default", AuthorityUtils.NO_AUTHORITIES);
+    }
+
     public Long getId() {
         return id;
     }

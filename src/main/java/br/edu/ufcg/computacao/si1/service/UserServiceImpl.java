@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
+import br.edu.ufcg.computacao.si1.security.auth.Token;
 import br.edu.ufcg.computacao.si1.service.factory.UserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -58,4 +59,8 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public User getByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
 }
