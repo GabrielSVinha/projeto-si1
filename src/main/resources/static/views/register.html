@@ -130,7 +130,7 @@
                         maxlength="16"
                         required
                         confirm-password="user.password"
-                        ng-model="user.confirmPassword"
+                        ng-model="confirmPassword"
                     />
 
                     <div
@@ -163,10 +163,10 @@
                     <label class="radio-inline">
                         <input
                             type="radio"
-                            name="role"
+                            name="type"
                             required
-                            ng-value="0"
-                            ng-model="user.role"
+                            ng-value="'INDIVIDUAL'"
+                            ng-model="user.type"
                         />
                         Pessoa Física
                     </label>
@@ -175,10 +175,10 @@
                     <label class="radio-inline">
                         <input
                             type="radio"
-                            name="role"
+                            name="type"
                             required
-                            ng-value="1"
-                            ng-model="user.role"
+                            ng-value="'COMPANY'"
+                            ng-model="user.type"
                         />
                         Pessoa Jurídica
                     </label>

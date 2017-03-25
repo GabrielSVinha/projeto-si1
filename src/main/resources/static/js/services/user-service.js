@@ -9,6 +9,16 @@
         var self = this;
 
         this.getUser = function() {
+            var deferred = $q.defer();
+
+            return deferred.promise;
+        };
+
+        this.registerUser = function(user) {
+            return $http.post('/api/user/', user);
+        };
+
+        this.login = function() {
 
         };
     }
