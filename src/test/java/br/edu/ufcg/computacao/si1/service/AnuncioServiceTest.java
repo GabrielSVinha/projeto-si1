@@ -47,9 +47,9 @@ public class AnuncioServiceTest {
 
     //     owner = usuarioService.create(userForm);
 
-    //     anuncio1 = new AdFurniture("Anuncio de Movel", new Date(), 100, Notas.notas[2], "MOVEL", owner);
-    //     anuncio2 = new AdRealty("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "IMOVEL", owner);
-    //     anuncio3 = new AnuncioEmprego("Anuncio de Emprego", new Date(), 0, Notas.notas[1], "EMPREGO", owner);
+    //     anuncio1 = new Ad("Anuncio de Movel", new Date(), 100, Notas.notas[2], "MOVEL", owner);
+    //     anuncio2 = new Ad("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "IMOVEL", owner);
+    //     anuncio3 = new Ad("Anuncio de Emprego", new Date(), 0, Notas.notas[1], "EMPREGO", owner);
 
     //     form1 = new AnuncioForm(anuncio1);
     //     form2 = new AnuncioForm(anuncio2);

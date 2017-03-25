@@ -5,13 +5,11 @@ import br.edu.ufcg.computacao.si1.model.form.AdForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.repository.AdRepository;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
-import br.edu.ufcg.computacao.si1.service.factory.AnuncioFactory;
+import br.edu.ufcg.computacao.si1.service.factory.AdFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 /**
  * Created by Marcus Oliveira on 28/12/16.
@@ -26,7 +24,7 @@ public class AdServiceImpl implements AdService {
     private UserRepository userRepository;
 
     @Autowired
-    private AnuncioFactory factory;
+    private AdFactory factory;
 
     public Collection<Ad> getAnunciosDoUsuario() {
         return null;

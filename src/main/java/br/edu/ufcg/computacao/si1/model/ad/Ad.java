@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="anuncios")
-public abstract class Ad {
+public class Ad {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
@@ -31,7 +31,7 @@ public abstract class Ad {
     private String note;
 
     @Column(name = "type", nullable = false)
-    private String type;
+    private AdType type;
 
     @Column(name = "userId")
     private Long userId;
@@ -40,7 +40,7 @@ public abstract class Ad {
     @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User owner;
 
-    public Ad(String title, Date creationDate, double price, String note, String type, User owner) {
+    public Ad(String title, Date creationDate, double price, String note, AdType type, User owner) {
         this.title = title;
         this.creationDate = creationDate;
         this.price = price;
@@ -55,7 +55,7 @@ public abstract class Ad {
         creationDate = new Date();
         price = 0;
         note = "";
-        type = "";
+        type = AdType.NONE;
     }
 
     /**
@@ -105,11 +105,11 @@ public abstract class Ad {
         this.note = note;
     }
 
-    public String getType() {
+    public AdType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(AdType type) {
         this.type = type;
     }
 

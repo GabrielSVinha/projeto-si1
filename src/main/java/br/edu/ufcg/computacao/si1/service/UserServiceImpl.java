@@ -3,7 +3,7 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
-import br.edu.ufcg.computacao.si1.service.factory.UsuarioFactory;
+import br.edu.ufcg.computacao.si1.service.factory.UserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(UserForm usuarioForm) {
-        User usuario = UsuarioFactory.create(usuarioForm);
+        User usuario = UserFactory.create(usuarioForm);
 
         return userRepository.save(usuario);
     }

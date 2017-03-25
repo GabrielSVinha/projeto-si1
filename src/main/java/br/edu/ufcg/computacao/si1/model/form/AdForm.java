@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.model.form;
 
 import br.edu.ufcg.computacao.si1.model.ad.Ad;
+import br.edu.ufcg.computacao.si1.model.ad.AdType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.DecimalMin;
@@ -20,7 +21,7 @@ public class AdForm {
 
     @NotNull(message = "O tipo de anúncio não pode ser nulo.")
     @NotEmpty(message = "Escolha um tipo para o anúncio.")
-    private String type;
+    private AdType type;
 
     @NotNull(message = "O criador do anuncio nao pode ser nulo.")
     @NotEmpty(message = "O criador do anuncio nao pode ser vazio.")
@@ -29,7 +30,7 @@ public class AdForm {
     public AdForm() {
     }
 
-    public AdForm(String title, Double price, String type, Long userId) {
+    public AdForm(String title, Double price, AdType type, Long userId) {
         this.title = title;
         this.price = price;
         this.type = type;
@@ -67,11 +68,11 @@ public class AdForm {
         this.price = price;
     }
 
-    public String getType() {
+    public AdType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(AdType type) {
         this.type = type;
     }
 }

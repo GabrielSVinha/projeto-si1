@@ -4,7 +4,7 @@ import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.model.user.UserType;
 
-public class UsuarioFactory {
+public class UserFactory {
 
     public static User create(UserForm form){
         User user = null;
