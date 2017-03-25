@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.edu.ufcg.computacao.si1.model.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.UUID;
 
 @Entity(name = "Token")
 @Table(name = "token")
@@ -22,7 +25,19 @@ public class Token {
     private String tokenKey;
 
     @OneToOne
+    @JsonIgnore
     private User user;
+
+    public Token(User user) {
+        this.tokenKey = UUID.randomUUID().toString();
+        this.user = user;
+    }
+
+    public Token(String key) {
+        this.tokenKey = key;
+    }
+
+    public Token() { }
 
     public Long getId() {
         return this.id;
