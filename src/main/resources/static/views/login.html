@@ -9,32 +9,35 @@
 
             <div style="margin-top: 15px;" class="panel-body" >
                 <form class="form-horizontal" role="form" name="loginForm" method="post">
-                    <!-- username begin -->
+                    <!-- email begin -->
                     <div
                         style="margin-bottom: 15px;"
                         ng-class="{
-                            'has-error': loginForm.username.$invalid && loginForm.username.$touched
+                            'has-error': loginForm.email.$invalid && loginForm.email.$touched
                         }"
                     >
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input
                                 class="form-control"
-                                type="text"
-                                name="username"
-                                placeholder="Usuário"
+                                type="email"
+                                name="email"
+                                placeholder="Email"
                                 required
-                                ng-model="user.username"
+                                ng-model="user.email"
                             />
                         </div>
 
                         <div
                             class="help-block"
-                            ng-messages="loginForm.username.$error"
-                            ng-show="loginForm.username.$invalid && loginForm.username.$touched"
+                            ng-messages="loginForm.email.$error"
+                            ng-show="loginForm.email.$invalid && loginForm.email.$touched"
                         >
                             <div ng-message="required">
                                 Preencha esse campo
+                            </div>
+                            <div ng-message="email">
+                                E-mail inválido
                             </div>
                         </div>
                     </div>

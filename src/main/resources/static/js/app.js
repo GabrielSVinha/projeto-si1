@@ -1,6 +1,18 @@
 var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ngCookies'])
-    .config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider) {
+    .config(['$locationProvider', '$stateProvider', '$httpProvider', function($locationProvider, $stateProvider, $httpProvider) {
         $locationProvider.html5Mode(true);
+
+        $httpProvider.interceptors.push(['$cookies', function($cookies) {
+            return {
+                request: function(config) {
+                    if (angular.isDefined($cookies.get('token'))) {
+                        config.headers['Authorization'] = $cookies.get('token');
+                    }
+
+                    return config;
+                }
+            }
+        }]);
 
         /**
          * If you're going to add another route, be sure to also add
@@ -22,8 +34,13 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ng
                 parent: 'app',
                 url: '/',
                 templateUrl: '/views/home.html',
-                controller: 'HomeController',
-                controllerAs: 'homeCtrl'
+            })
+            .state('profile', {
+                parent: 'app',
+                url: '/perfil',
+                templateUrl: '/views/profile.html',
+                controller: 'ProfileController',
+                controllerAs: 'profileCtrl'
             })
             .state('register', {
                 parent: 'app',

@@ -16,4 +16,19 @@ public class TokenServiceImpl implements TokenService {
     public Token createSessionToken(User user) {
         return tokenRepository.save(new Token(user));
     }
+
+    @Override
+    public boolean delete(Token token) {
+        if (tokenRepository.exists(token.getId())) {
+            tokenRepository.delete(token);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public Token getByKey(String tokenKey) {
+        return tokenRepository.getByTokenKey(tokenKey);
+    }
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+import javax.ws.rs.HeaderParam;
+
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
 public class UserController {
@@ -55,9 +57,33 @@ public class UserController {
         User user = userService.getByEmailAndPassword(userForm.getEmail(), userForm.getPassword());
 
         if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
         return ResponseEntity.ok(tokenService.createSessionToken(user));
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ResponseEntity<Void> logout(@RequestHeader(value="Authorization") String tokenKey) {
+        Token token = tokenService.getByKey(tokenKey);
+
+        if (token != null) {
+            tokenService.delete(token);
+
+            return ResponseEntity.noContent().build();
+        }
+
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
+
+    @RequestMapping(value = "/me", method = RequestMethod.GET)
+    public ResponseEntity<User> getLoggedUser(@RequestHeader(value="Authorization") String tokenKey) {
+        Token token = tokenService.getByKey(tokenKey);
+
+        if (token == null || token == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        return ResponseEntity.ok(token.getUser());
     }
 }
