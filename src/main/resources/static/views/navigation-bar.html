@@ -15,7 +15,16 @@
             </ul>
         </div>
         <div ng-if="isLoggedIn()">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ui-sref="ads.list">Anúncios</a>
+                </li>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a ui-sref="profile">Olá, {{ user.name }}</a>
+                </li>
                 <li>
                     <a href ng-click="logout()">Logout</a>
                 </li>

@@ -36,11 +36,13 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<User> createUser(@RequestBody UserForm userForm) {
-        if (this.userService.create(userForm) == null) {
+        User user = userService.create(userForm);
+
+        if (user == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

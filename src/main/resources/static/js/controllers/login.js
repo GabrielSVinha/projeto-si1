@@ -11,7 +11,9 @@
         this.submit = function(user) {
             UserService.login(user)
                 .then(function(user) {
-                    $state.go('profile');
+                    if (user !== null) {
+                        $state.go('profile');
+                    }
                 })
                 .catch(function() {
                     // ops..

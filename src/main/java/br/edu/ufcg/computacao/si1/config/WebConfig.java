@@ -36,7 +36,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 "/",
                 "/cadastre-se",
                 "/login",
-                "/anuncios",
+                "/anuncios/lista",
+                "/anuncios/novo",
                 "/perfil"
             )
             .addResourceLocations("classpath:/static/index.html")

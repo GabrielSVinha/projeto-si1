@@ -20,7 +20,6 @@ public class AdFactory {
                 return new Ad(form.getTitle(),
                                         new Date(),
                                         form.getPrice(),
-                                        null,
                                         AdType.FURNITURE,
                                         userRepository.findOne(form.getUserId()));
 
@@ -28,7 +27,6 @@ public class AdFactory {
                 return new Ad(form.getTitle(),
                                          new Date(),
                                          form.getPrice(),
-                                         null,
                                          AdType.REALTY,
                                          userRepository.findOne(form.getUserId()));
 
@@ -36,7 +34,6 @@ public class AdFactory {
                 return new Ad(form.getTitle(),
                                           new Date(),
                                           form.getPrice(),
-                                          null,
                                           AdType.JOB,
                                           userRepository.findOne(form.getUserId())) ;
 

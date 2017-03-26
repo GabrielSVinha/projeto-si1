@@ -3,9 +3,9 @@
 
     app.directive('navigationBar', NavigationBar);
 
-    NavigationBar.$inject = ['$state', 'UserService'];
+    NavigationBar.$inject = ['$rootScope', '$state', 'UserService'];
 
-    function NavigationBar($state, UserService) {
+    function NavigationBar($rootScope, $state, UserService) {
         return {
             restrict: 'E',
             templateUrl: '/views/navigation-bar.html',
@@ -15,6 +15,14 @@
                     return UserService.isLoggedIn();
                 };
 
+                UserService.getUser()
+                    .then(function(user) {
+                        scope.user = user;
+                    })
+                    .catch(function() {
+                        scope.user = null;
+                    });
+
                 scope.logout = function() {
                     UserService.logout()
                         .then(function(success) {
@@ -23,6 +31,13 @@
                             }
                         });
                 };
+
+                $rootScope.$on('loginSuccess', function() {
+                    UserService.getUser()
+                        .then(function(user) {
+                            scope.user = user;
+                        });
+                });
             }
         };
     }

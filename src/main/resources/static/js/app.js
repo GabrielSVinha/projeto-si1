@@ -28,7 +28,13 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ng
                             .catch(() => ({}));
                     }]
                 },
-                template: '<div data-ui-view></div>'
+                template: `
+                    <navigation-bar></navigation-bar>
+
+                    <div data-ui-view></div>
+
+                    <main-footer></main-footer>
+                `
             })
             .state('home', {
                 parent: 'app',
@@ -58,9 +64,18 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ng
             })
             .state('ads', {
                 parent: 'app',
+                abstract: true,
                 url: '/anuncios',
-                templateUrl: '/views/ad-list.html',
                 controller: 'AdController',
-                controllerAs: 'adsCtrl'
-            });
+                controllerAs: 'adsCtrl',
+                template: '<div ui-view></div>'
+            })
+                .state('ads.list', {
+                    url: '/lista',
+                    templateUrl: '/views/ad-list.html'
+                })
+                .state('ads.create', {
+                    url: '/novo',
+                    templateUrl: '/views/create-ad.html'
+                });
     }]);

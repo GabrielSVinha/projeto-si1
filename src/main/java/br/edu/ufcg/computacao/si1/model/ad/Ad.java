@@ -3,6 +3,10 @@ package br.edu.ufcg.computacao.si1.model.ad;
 import br.edu.ufcg.computacao.si1.model.user.User;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeId;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,9 +31,6 @@ public class Ad {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @Column(name = "note")
-    private String note;
-
     @Column(name = "type", nullable = false)
     private AdType type;
 
@@ -40,11 +41,10 @@ public class Ad {
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User owner;
 
-    public Ad(String title, Date creationDate, double price, String note, AdType type, User owner) {
+    public Ad(String title, Date creationDate, double price, AdType type, User owner) {
         this.title = title;
         this.creationDate = creationDate;
         this.price = price;
-        this.note = note;
         this.type = type;
         this.owner = owner;
         this.userId = owner.getId();
@@ -54,7 +54,6 @@ public class Ad {
         title = "";
         creationDate = new Date();
         price = 0;
-        note = "";
         type = AdType.NONE;
     }
 
@@ -97,14 +96,6 @@ public class Ad {
         this.price = price;
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     public AdType getType() {
         return type;
     }
@@ -113,6 +104,7 @@ public class Ad {
         this.type = type;
     }
 
+    @JsonIgnore
     public User getUser() {
         return owner;
     }
@@ -132,9 +124,7 @@ public class Ad {
         if (!getId().equals(anuncio.getId())) return false;
         if (!getTitle().equals(anuncio.getTitle())) return false;
         if (!getCreationDate().equals(anuncio.getCreationDate())) return false;
-        if (getNote() != null ? !getNote().equals(anuncio.getNote()) : anuncio.getNote() != null) return false;
         return getType().equals(anuncio.getType());
-
     }
 
     @Override
@@ -146,7 +136,6 @@ public class Ad {
         result = 31 * result + getCreationDate().hashCode();
         temp = Double.doubleToLongBits(getPrice());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (getNote() != null ? getNote().hashCode() : 0);
         result = 31 * result + getType().hashCode();
         return result;
     }
@@ -158,7 +147,6 @@ public class Ad {
                 "\ttitle:'" + title + ", "+ System.lineSeparator() +
                 "\tcreationDate:" + getCreationDate() +", "+ System.lineSeparator() +
                 "\tprice:" + price +", "+ System.lineSeparator() +
-                "\tnote:" + note +", "+ System.lineSeparator() +
                 "\ttype:'" + type + ", "+ System.lineSeparator() +
                 "\tuserId:" +owner.getId()+", "+ System.lineSeparator() +
                 '}';

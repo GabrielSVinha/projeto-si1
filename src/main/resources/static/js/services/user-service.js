@@ -3,9 +3,9 @@
 
     app.service('UserService', UserService);
 
-    UserService.$inject = ['$http', '$q', '$cookies'];
+    UserService.$inject = ['$http', '$q', '$cookies', '$rootScope'];
 
-    function UserService($http, $q, $cookies) {
+    function UserService($http, $q, $cookies, $rootScope) {
         var self = this;
 
         this.user = null;
@@ -14,7 +14,7 @@
             var deferred = $q.defer();
 
             if (self.user !== null) {
-                deferred.resolve(user);
+                deferred.resolve(self.user);
             }
 
             if (!angular.isDefined($cookies.get('token'))) {
@@ -37,7 +37,12 @@
         };
 
         this.registerUser = function(user) {
-            return $http.post('/api/user/', user);
+            return $http.post('/api/user/', user)
+                .then(response => response.data)
+                .then(function(user) {
+                    self.user = user;
+                    return self.login(user);
+                });
         };
 
         this.login = function(user) {
@@ -45,9 +50,13 @@
                 .then(response => response.data)
                 .then(function(response) {
                     $cookies.put('token', response.tokenKey);
+                    $rootScope.$broadcast('loginSuccess');
+
                     return self.getUser();
                 })
                 .catch(function() {
+                    $rootScope.$broadcast('loginFailed');
+
                     return null;
                 });
         };
@@ -58,13 +67,16 @@
                     if (response.status === 204) {
                         self.user = null;
                         $cookies.remove('token');
+                        $rootScope.$broadcast('logoutSuccess');
 
                         return true;
                     }
 
+                    $rootScope.$broadcast('logoutFailed');
                     return false;
                 })
                 .catch(function() {
+                    $rootScope.$broadcast('logoutFailed');
                     return false;
                 });
         };
