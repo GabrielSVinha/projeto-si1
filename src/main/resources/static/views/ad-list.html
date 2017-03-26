@@ -25,7 +25,7 @@
                     <td>{{ :: ad.title }}</td>
                     <td>{{ :: ad.type }}</td>
                     <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
-                    <td align="center">{{ :: ad.price | currency }}</td>
+                    <td align="center">{{ :: ad.price | currency:'R$' }}</td>
                 </tr>
 
                 <tr ng-show="adsCtrl.ads.length === 0">
