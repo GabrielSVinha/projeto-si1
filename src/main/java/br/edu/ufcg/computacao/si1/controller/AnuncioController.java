@@ -53,4 +53,9 @@ public class AnuncioController {
 
         return new ResponseEntity<Anuncio>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/date", method = RequestMethod.GET)
+    public ResponseEntity<Collection<Anuncio>> getAnunciosByDate(@RequestParam(value="date") String date){
+        return new ResponseEntity<Collection<Anuncio>>(anuncioService.getByDate(date), HttpStatus.OK);
+    }
 }

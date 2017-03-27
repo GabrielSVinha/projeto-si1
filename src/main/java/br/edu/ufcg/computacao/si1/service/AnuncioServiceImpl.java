@@ -97,6 +97,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public Collection<Anuncio> getByDate(String date) {
+
         return anuncioRepository.findAll().stream()
                 .filter(anuncio -> anuncio.getDataDeCriacao().toString().contains(date))
                 .collect(Collectors.toCollection(ArrayList::new));
