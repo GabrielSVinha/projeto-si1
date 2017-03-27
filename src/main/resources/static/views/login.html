@@ -1,5 +1,3 @@
-<navigation-bar></navigation-bar>
-
 <div class="container">
     <div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-default" >
@@ -9,32 +7,35 @@
 
             <div style="margin-top: 15px;" class="panel-body" >
                 <form class="form-horizontal" role="form" name="loginForm" method="post">
-                    <!-- username begin -->
+                    <!-- email begin -->
                     <div
                         style="margin-bottom: 15px;"
                         ng-class="{
-                            'has-error': loginForm.username.$invalid && loginForm.username.$touched
+                            'has-error': loginForm.email.$invalid && loginForm.email.$touched
                         }"
                     >
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input
                                 class="form-control"
-                                type="text"
-                                name="username"
-                                placeholder="Usuário"
+                                type="email"
+                                name="email"
+                                placeholder="Email"
                                 required
-                                ng-model="user.username"
+                                ng-model="user.email"
                             />
                         </div>
 
                         <div
                             class="help-block"
-                            ng-messages="loginForm.username.$error"
-                            ng-show="loginForm.username.$invalid && loginForm.username.$touched"
+                            ng-messages="loginForm.email.$error"
+                            ng-show="loginForm.email.$invalid && loginForm.email.$touched"
                         >
                             <div ng-message="required">
                                 Preencha esse campo
+                            </div>
+                            <div ng-message="email">
+                                E-mail inválido
                             </div>
                         </div>
                     </div>
@@ -73,12 +74,6 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-11 clearfix">
-                            <div class="checkbox" style="display: inline-block;">
-                                <label>
-                                    <input ng-model="user.rememberMe" type="checkbox" name="remember-me"/>
-                                    Lembra-se
-                                </label>
-                            </div>
                             <button
                                 type="submit"
                                 class="btn btn-success"
@@ -95,5 +90,3 @@
         </div>
     </div>
 </div>
-
-<main-footer></main-footer>

@@ -1,25 +1,130 @@
-<navigation-bar></navigation-bar>
+<div class="container">
+    <div class="col-md-offset-2 col-md-8">
+        <form class="form-horizontal" name="adForm" novalidate>
+            <fieldset>
+                <legend>Cadastrar Anúncio</legend>
 
-<div style="margin: 3% 3% 3% 3%" ng-cloak>
-    <div class="input-group">
-        <i class="fa fa-bookmark" aria-hidden="true"></i>
-        <input placeholder="Título" type="text" ng-model="ad.title" />
-    </div>
+                <!-- title begin -->
+                <div
+                    class="form-group"
+                    ng-class="{
+                        'has-error': adForm.title.$invalid && adForm.title.$touched
+                    }"
+                >
+                    <label class="col-md-4 control-label" for="title">Titulo</label>
+                    <div class="col-md-4">
+                        <input
+                            class="form-control input-md"
+                            id="title"
+                            name="title"
+                            type="text"
+                            placeholder="Titulo do anuncio"
+                            required
+                            ng-model="ad.title"
+                        />
+                    </div>
+                </div>
+                <!-- title end -->
 
-    <div class="input-group">
-        <i class="fa fa-usd" aria-hidden="true"></i>
-        <input placeholder="Preço" type="text" ng-model="ad.price" />
-    </div>
+                <!-- price begin -->
+                <div
+                    class="form-group"
+                    ng-class="{
+                        'has-error': adForm.price.$invalid && adForm.price.$touched
+                    }"
+                >
+                    <label class="col-md-4 control-label" for="price">Preço</label>
+                    <div class="col-md-4">
+                        <input
+                            class="form-control input-md"
+                            id="price"
+                            name="price"
+                            type="number"
+                            min="0.1"
+                            placeholder="Preço"
+                            required
+                            ng-model="ad.price"
+                        />
+                    </div>
+                </div>
+                <!-- price end -->
 
-    <div class="input-group">
-        <<i class="fa fa-flag" aria-hidden="true"></i>
-        <input placeholder="Tipo" type="text" ng-model="ad.type" />
-    </div>
+                <!-- type begin -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Tipo</label>
+                    <div class="col-md-4">
+                        <div class="radio">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    required
+                                    ng-value="'FURNITURE'"
+                                    ng-model="ad.type"
+                                />
+                                Móvel
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    required
+                                    ng-value="'REALTY'"
+                                    ng-model="ad.type"
+                                />
+                                Imóvel
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    required
+                                    ng-value="'JOB'"
+                                    ng-model="ad.type"
+                                />
+                                Emprego
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    required
+                                    ng-value="'NONE'"
+                                    ng-model="ad.type"
+                                />
+                                Nenhum
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- type end -->
 
-    <div>
-        <button class="btn btn-success">Cadastrar Anúncio</button>
-        <button class="btn btn-info">Limpar Campos</button>
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-4">
+                        <button
+                            class="btn btn-success"
+                            ng-disabled="adForm.$invalid"
+                            ng-click="adsCtrl.createAd(ad)"
+                        >
+                            Cadastrar
+                        </button>
+                        <button
+                            class="btn btn-danger"
+                            ng-disabled="adForm.$pristine"
+                            ng-click="adsCtrl.clearAdForm(ad, adForm)"
+                        >
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </div>
-
-<main-footer></main-footer>

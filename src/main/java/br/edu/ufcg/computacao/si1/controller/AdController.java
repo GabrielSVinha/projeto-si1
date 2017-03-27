@@ -1,32 +1,22 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.ad.Ad;
-import br.edu.ufcg.computacao.si1.model.ad.Ad;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
-import br.edu.ufcg.computacao.si1.model.form.AdForm;
-import br.edu.ufcg.computacao.si1.repository.AdRepository;
-import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
+import br.edu.ufcg.computacao.si1.service.AdService;
+import br.edu.ufcg.computacao.si1.service.AdServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/api/anuncios")
-public class AnuncioController {
+public class AdController {
 
     @Autowired
-    private AnuncioServiceImpl anuncioService;
+    private AdServiceImpl anuncioService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<Collection<Ad>> getAllAnuncios(){

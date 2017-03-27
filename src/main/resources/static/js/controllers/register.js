@@ -3,13 +3,21 @@
 
     app.controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = [];
+    RegisterController.$inject = ['$state', 'UserService'];
 
-    function RegisterController() {
+    function RegisterController($state, UserService) {
         var self = this;
 
         this.submitForm = function(user) {
-            // register
+            UserService.registerUser(user)
+                .then(function(user) {
+                    if (user !== null) {
+                        $state.go('profile');
+                    }
+                })
+                .catch(function() {
+                    // heh..
+                });
         };
 
         this.resetForm = function(user, form) {
@@ -21,7 +29,7 @@
             user.email = null;
             user.password = null;
             user.confirmPassword = null;
-            user.role = null;
+            user.type = null;
 
             form.$setPristine();
             form.$setUntouched();

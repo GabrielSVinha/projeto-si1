@@ -1,29 +1,19 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.ad.Ad;
-import br.edu.ufcg.computacao.si1.model.ad.Ad;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
-import br.edu.ufcg.computacao.si1.model.form.AdForm;
-import br.edu.ufcg.computacao.si1.repository.AdRepository;
+import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.repository.AdRepository;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
-import br.edu.ufcg.computacao.si1.service.factory.AdFactory;
 import br.edu.ufcg.computacao.si1.service.factory.AdFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Created by Marcus Oliveira on 28/12/16.
- */
-@Service
-public class AnuncioServiceImpl implements AnuncioService {
+public class AdServiceImpl implements AnuncioService {
     //TODO add validity checks
 
     private AdRepository anuncioRepository;
@@ -33,7 +23,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     private AdFactory factory;
 
     @Autowired
-    public AnuncioServiceImpl(AdRepository anuncioRepository, UserRepository userRepository) {
+    public AdServiceImpl(AdRepository anuncioRepository, UserRepository userRepository) {
         this.anuncioRepository = anuncioRepository;
         this.usuarioRepository = userRepository;
     }

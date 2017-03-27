@@ -1,78 +1,72 @@
-//package br.edu.ufcg.computacao.si1.service;
-//
-//import br.edu.ufcg.computacao.si1.InitialPoint;
-//import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
-//import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-//import br.edu.ufcg.computacao.si1.model.usuario.UsuarioEmpresa;
-//import br.edu.ufcg.computacao.si1.model.usuario.UsuarioPessoa;
-//import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.SpringApplicationConfiguration;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//import org.springframework.test.context.junit4.SpringRunner;
-//
-//import javax.transaction.Transactional;
-//
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertNotNull;
-//
-///**
-// * Created by gabriel on 09/03/17.
-// */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//public class UsuarioServiceTest {
-//
+package br.edu.ufcg.computacao.si1.service;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+/**
+* Created by gabriel on 09/03/17.
+*/
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UsuarioServiceTest {
+
+    @Test
+    public void teste() {
+        assertTrue(true);
+    }
+
 //    @Autowired
-//    private UsuarioRepository repo;
-//
-//    private UsuarioService service;
-//
-//    private UsuarioForm form;
-//
+//    private UsuarioRepository userRepository;
+
+//    @Autowired
+//    private UsuarioService userService;
+
+//    private UsuarioForm userForm;
+
 //    @Before
-//    public void setUp(){
-//        this.service = new UsuarioServiceImpl();
-//        this.form = new UsuarioForm();
-//        form.setNome("Massoni");
-//        form.setEmail("massoni@professor.com");
-//        form.setSenha("condingdojo");
-//        form.setRole(1);
-//        repo.save(new UsuarioEmpresa(form.getNome(), form.getEmail(), form.getSenha()));
-//        //this.service.create(form);
+//    public void setUp() {
+//        userForm = new UsuarioForm("Massoni", "massoni@professor.com", "condingdojo", 1);
+
+//        userRepository.save(new UsuarioEmpresa(userForm.getName(), userForm.getEmail(), userForm.getPassword()));
+
+//        userService.create(userForm);
 //    }
-////
-////    @After
-////    public void tearDown() {
-////        repo.deleteAll();
-////    }
-////
-////    @Test
-////    public void testInicializacao(){
-////        assertNotNull(this.service);
-////    }
-//
-////    @Test
-////    public void testFactory(){
-////        this.service.create(form);
-////        assertEquals(repo.count(), 2);
-////        assertEquals(repo.findByEmail("massoni@professor.com").getR(), 1);
-////    }
-//
-////    @Test
-////    public void testTypes(){
-////        assertEquals(UsuarioPessoa.class, service.create(form));
-////    }
-//
-////    @Test
-////    public void testDeletion(){
-////        this.service.delete(Integer.toUnsignedLong(1));
-////        assertEquals(Integer.toUnsignedLong(0), repo.count());
-////    }
-//
-//}
+
+//    @After
+//    public void tearDown() {
+//        userRepository.deleteAll();
+//    }
+
+//    @Test
+//    public void testInicializacao() {
+//        assertNotNull(userService);
+//    }
+
+//    @Test
+//    public void testFactory() {
+//        userService.create(userForm);
+//        assertEquals(userRepository.count(), 2);
+//        assertEquals(userRepository.findByEmail("massoni@professor.com").getRole(), 1);
+//    }
+
+//    @Test
+//    public void testTypes() {
+//        assertEquals(UsuarioPessoa.class, userService.create(userForm));
+//    }
+
+//    @Test
+//    public void testDeletion() {
+//        userService.delete(1L);
+//        assertEquals(0L, userRepository.count());
+//    }
+
+}

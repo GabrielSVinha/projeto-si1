@@ -1,8 +1,6 @@
 package br.edu.ufcg.computacao.si1.config;
 
-
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.service.UsuarioService;
+import br.edu.ufcg.computacao.si1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -34,19 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             .csrf().disable()
             .authorizeRequests()
                     .antMatchers("/", "/api/**", "/vendor/**", "/views/**").permitAll()
-                    .anyRequest().permitAll()
-                .and()
-            .formLogin()
-                    .loginPage("/login").permitAll()
-                    .successHandler(new CustomAuthenticationSuccessHandler())
-                    .failureUrl("/login?error")
-                .and()
-            .logout()
-                    .logoutUrl("/logout")
-                    .deleteCookies("remember-me","JSESSIONID")
-                    .logoutSuccessUrl("/login").permitAll()
-                .and()
-                    .rememberMe();
+                    .anyRequest().permitAll();
     }
 
     /**
@@ -65,9 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
         auth.jdbcAuthentication().dataSource(dataSource)
             .usersByUsernameQuery(
-                "select email as username,senha as password, true as enabled from tb_usuario where email=?")
+                "select email as username, password, true as enabled from user where email=?")
             .authoritiesByUsernameQuery(
-                "select email as username, role from tb_usuario where email=?");
+                "select email as username, type from user where email=?");
     }
 
 //    @Autowired
@@ -81,15 +67,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected UserDetailsService userDetailsService(){
         return new UserDetailsService() {
             @Autowired
-            UsuarioService usuarioService;
+            UserService usuarioService;
 
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                Usuario usuario = usuarioService.getByEmail(email).get();
-                if(usuario != null){
-                    return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true,
-                            AuthorityUtils.createAuthorityList(usuario.getR()));
-                }else {
+                br.edu.ufcg.computacao.si1.model.user.User usuario = usuarioService.getByEmail(email).get();
+                if (usuario != null) {
+                    return new User(usuario.getEmail(), usuario.getPassword(), true, true, true, true,
+                            AuthorityUtils.createAuthorityList());
+                } else {
                     throw new UsernameNotFoundException("Não foi possível localizar o usuário" + usuario);
                 }
             }

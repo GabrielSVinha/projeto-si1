@@ -2,13 +2,12 @@ package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.ad.Ad;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
+import br.edu.ufcg.computacao.si1.model.user.User;
 
 import java.util.Collection;
+import java.util.Optional;
 
-/**
- * Created by Marcus Oliveira on 28/12/16.
- */
-public interface AnuncioService {
+public interface AdService {
 
     Ad create(AdForm anuncio);
 
