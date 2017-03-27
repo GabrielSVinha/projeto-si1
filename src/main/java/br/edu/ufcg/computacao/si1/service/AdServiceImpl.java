@@ -111,7 +111,23 @@ public class AdServiceImpl implements AdService {
     @Override
     public Collection<Ad> getByType(String type) {
         return anuncioRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getType().equals(type))
+                .filter(anuncio -> anuncio.getType().name().equalsIgnoreCase(type))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+
+
+    @Override
+    public Collection<Ad> search(String user, String date, String type) {
+
+        if (user != null) {
+            return this.getByUser(user);
+        } else if (date != null) {
+            return this.getByDate(date);
+        } else if (type != null) {
+            return this.getByType(type);
+        }
+
+        throw new RuntimeException("Parametro de busca invalido");
+    }
+
 }

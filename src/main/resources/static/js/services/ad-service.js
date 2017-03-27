@@ -16,13 +16,13 @@
         this.createAd = function(ad) {
             return UserService.getUser()
                 .then(function(user) {
-                    ad.userId = user.id;
+                    ad.user = user.user_id;
                     return ad;
                 })
                 .then(function(ad) {
-                    return $http.post('/api/ad/', ad);
+                    return $http.post('/api/ad/new', ad);
                 })
-                .then(response => response.data);
+                .then(response => response.entity);
         };
     }
 })();

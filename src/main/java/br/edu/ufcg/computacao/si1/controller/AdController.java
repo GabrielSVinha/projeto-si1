@@ -8,10 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 import java.util.Collection;
+import java.util.Date;
 
 @RestController
-@RequestMapping(value = "/api/anuncios")
+@RequestMapping(value = "/api/ad")
 public class AdController {
 
     @Autowired
@@ -22,9 +25,12 @@ public class AdController {
         return new ResponseEntity<Collection<Ad>>(adService.getAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getUserAnuncios(@RequestParam(value="user") String user){
-        return new ResponseEntity<Collection<Ad>>(adService.getByUser(user), HttpStatus.OK);
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public Response getUserAnuncios(@QueryParam(value="user") String user,
+                                                          @QueryParam(value="date") String date,
+                                                          @QueryParam(value="type") String type){
+
+        return Response.status(Response.Status.ACCEPTED).entity(adService.search(user, date, type)).build();
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -36,12 +42,14 @@ public class AdController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<Ad> cadastroAnuncio(@RequestBody AdForm anuncioForm){
-        if(this.adService.create(anuncioForm) == null){
-            return new ResponseEntity<Ad>(HttpStatus.BAD_REQUEST);
+    public @ResponseBody Response cadastroAnuncio(@RequestBody AdForm anuncioForm){
+        Ad adCriado = this.adService.create(anuncioForm);
+        if(adCriado == null){
+            //return new ResponseEntity<Ad>(HttpStatus.BAD_REQUEST) ;
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        return new ResponseEntity<Ad>(HttpStatus.OK);
+        return Response.status(Response.Status.CREATED).entity(adCriado).build();
     }
 
     @RequestMapping(value = "/date", method = RequestMethod.GET)
