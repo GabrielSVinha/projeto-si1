@@ -3,12 +3,15 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
+import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import br.edu.ufcg.computacao.si1.service.factory.AnuncioFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,13 +23,15 @@ public class AnuncioServiceImpl implements AnuncioService {
     //TODO add validity checks
 
     private AnuncioRepository anuncioRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private AnuncioFactory factory;
 
     @Autowired
-    public AnuncioServiceImpl(AnuncioRepository anuncioRepository) {
+    public AnuncioServiceImpl(AnuncioRepository anuncioRepository, UsuarioRepository usuarioRepository) {
         this.anuncioRepository = anuncioRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public AnuncioRepository getAnuncioRepository(){
@@ -91,12 +96,19 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
 
     @Override
+    public Collection<Anuncio> getByDate(String date) {
+        return anuncioRepository.findAll().stream()
+                .filter(anuncio -> anuncio.getDataDeCriacao().toString().contains(date))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
     public Collection<Anuncio> getByUser(String username) {
         /*
         aqui filtramos os anuncios pelo usuario
          */
         return anuncioRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getUser().getUsername().equals(username))
+                .filter(anuncio -> anuncio.getUser().equals(usuarioRepository.findByNome(username)))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

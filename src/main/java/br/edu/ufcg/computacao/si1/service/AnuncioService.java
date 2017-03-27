@@ -5,6 +5,7 @@ import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -26,4 +27,5 @@ public interface AnuncioService {
 
     boolean delete(Long id);
 
+    Collection<Anuncio> getByDate(String date);
 }
