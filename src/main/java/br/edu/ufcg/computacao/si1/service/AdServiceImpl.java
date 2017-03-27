@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class AdServiceImpl implements AnuncioService {
+@Service
+public class AdServiceImpl implements AdService {
     //TODO add validity checks
 
     private AdRepository anuncioRepository;

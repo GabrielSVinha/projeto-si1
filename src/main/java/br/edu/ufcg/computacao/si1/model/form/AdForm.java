@@ -25,31 +25,31 @@ public class AdForm {
 
     @NotNull(message = "O criador do anuncio nao pode ser nulo.")
     @NotEmpty(message = "O criador do anuncio nao pode ser vazio.")
-    private Long userId;
+    private Long user;
 
     public AdForm() {
     }
 
-    public AdForm(String title, Double price, AdType type, Long userId) {
+    public AdForm(String title, Double price, AdType type, Long user_id) {
         this.title = title;
         this.price = price;
         this.type = type;
-        this.userId = userId;
+        this.user = user_id;
     }
 
     public AdForm(Ad anuncio){
         this.title = anuncio.getTitle();
         this.price = anuncio.getPrice();
         this.type = anuncio.getType();
-        this.userId = anuncio.getUser().getId();
+        this.user = anuncio.getUser().getUser_id();
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getUser_Id() {
+        return user;
     }
 
     public void setUser(Long userId) {
-        this.userId = userId;
+        this.user = userId;
     }
 
     public String getTitle() {

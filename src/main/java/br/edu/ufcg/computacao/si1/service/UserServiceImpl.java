@@ -3,7 +3,6 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
-import br.edu.ufcg.computacao.si1.security.auth.Token;
 import br.edu.ufcg.computacao.si1.service.factory.UserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -18,6 +17,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User create(UserForm usuarioForm) {
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean update(User usuario) {
-        if (userRepository.exists(usuario.getId())) {
+        if (userRepository.exists(usuario.getUser_id())) {
             userRepository.save(usuario);
             return true;
         }
