@@ -28,4 +28,6 @@ public interface AnuncioService {
     boolean delete(Long id);
 
     Collection<Anuncio> getByDate(String date);
+
+    Collection<Anuncio> getByType(String type);
 }

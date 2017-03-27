@@ -112,4 +112,11 @@ public class AnuncioServiceImpl implements AnuncioService {
                 .filter(anuncio -> anuncio.getUser().equals(usuarioRepository.findByNome(username)))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    @Override
+    public Collection<Anuncio> getByType(String type) {
+        return anuncioRepository.findAll().stream()
+                .filter(anuncio -> anuncio.getTipo().equals(type))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 }
