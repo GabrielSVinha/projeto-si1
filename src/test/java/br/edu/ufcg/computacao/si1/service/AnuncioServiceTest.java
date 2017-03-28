@@ -1,15 +1,5 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
-import br.edu.ufcg.computacao.si1.model.Notas;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioEmprego;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioImovel;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioMovel;
-import br.edu.ufcg.computacao.si1.model.form.AnuncioForm;
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.model.usuario.UsuarioEmpresa;
-import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,9 +47,9 @@ public class AnuncioServiceTest {
 
     //     owner = usuarioService.create(userForm);
 
-    //     anuncio1 = new AnuncioMovel("Anuncio de Movel", new Date(), 100, Notas.notas[2], "MOVEL", owner);
-    //     anuncio2 = new AnuncioImovel("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "IMOVEL", owner);
-    //     anuncio3 = new AnuncioEmprego("Anuncio de Emprego", new Date(), 0, Notas.notas[1], "EMPREGO", owner);
+    //     anuncio1 = new Ad("Anuncio de Movel", new Date(), 100, Notas.notas[2], "MOVEL", owner);
+    //     anuncio2 = new Ad("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "IMOVEL", owner);
+    //     anuncio3 = new Ad("Anuncio de Emprego", new Date(), 0, Notas.notas[1], "EMPREGO", owner);
 
     //     form1 = new AnuncioForm(anuncio1);
     //     form2 = new AnuncioForm(anuncio2);
@@ -118,13 +108,13 @@ public class AnuncioServiceTest {
     //     assertEquals(anuncioImovel.getType(), "imovel");
     //     assertEquals(anuncioEmprego.getType(), "emprego");
 
-    //     assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.get("movel").size());
-    //     assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.get("imovel").size());
-    //     assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.get("emprego").size());
+    //     assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.getByType("movel").size());
+    //     assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.getByType("imovel").size());
+    //     assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.getByType("emprego").size());
 
-    //     assertTrue(anuncioService.get("movel").contains(anuncioMovel));
-    //     assertTrue(anuncioService.get("imovel").contains(anuncioImovel));
-    //     assertTrue(anuncioService.get("emprego").contains(anuncioEmprego));
+    //     assertTrue(anuncioService.getByType("movel").contains(anuncioMovel));
+    //     assertTrue(anuncioService.getByType("imovel").contains(anuncioImovel));
+    //     assertTrue(anuncioService.getByType("emprego").contains(anuncioEmprego));
     // }
 
     // @Test

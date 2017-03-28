@@ -1,7 +1,13 @@
-<navigation-bar></navigation-bar>
-
 <div class="col-md-offset-2 col-md-8">
     <h1>Anúncios</h1>
+
+    <a
+        class="btn btn-success"
+        style="margin-bottom: 15px;"
+        ui-sref="^.create"
+    >
+        Cadastrar anúncio
+    </a>
 
     <div class="table-responsive">
         <table style="width:100%" class="table table-bordered">
@@ -18,16 +24,17 @@
                 <tr ng-repeat="ad in adsCtrl.ads">
                     <td>{{ :: ad.title }}</td>
                     <td>{{ :: ad.type }}</td>
-                    <td>{{ :: ad.createdAt | date }}</td>
-                    <td align="center">{{ :: ad.price | currency }}</td>
+                    <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td align="center">{{ :: ad.price | currency:'R$' }}</td>
                 </tr>
 
                 <tr ng-show="adsCtrl.ads.length === 0">
                     <td>Não existem anúncios ainda</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-<main-footer></main-footer>

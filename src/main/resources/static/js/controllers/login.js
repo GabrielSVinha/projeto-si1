@@ -3,13 +3,21 @@
 
     app.controller('LoginController', LoginController);
 
-    LoginController.$inject = [];
+    LoginController.$inject = ['$state', 'UserService'];
 
-    function LoginController() {
+    function LoginController($state, UserService) {
         var self = this;
 
         this.submit = function(user) {
-            // login
+            UserService.login(user)
+                .then(function(user) {
+                    if (user !== null) {
+                        $state.go('profile');
+                    }
+                })
+                .catch(function() {
+                    // ops..
+                });
         };
     }
 })();
