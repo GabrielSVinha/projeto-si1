@@ -23,10 +23,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SoldRepository soldRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     @Override
     public User create(UserForm usuarioForm) {
         User usuario = UserFactory.create(usuarioForm);
@@ -51,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean update(User usuario) {
-        if (userRepository.exists(usuario.getUser_id())) {
+        if (userRepository.exists(usuario.getId())) {
             userRepository.save(usuario);
             return true;
         }

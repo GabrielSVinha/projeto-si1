@@ -107,7 +107,7 @@ public class AdServiceImpl implements AdService {
         aqui filtramos os anuncios pelo usuario
          */
         return adRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getUser().getUser_id().equals(userRepository.findByName(username).getUser_id()))
+                .filter(anuncio -> anuncio.getUser().getId().equals(userRepository.findByName(username).getId()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -135,7 +135,7 @@ public class AdServiceImpl implements AdService {
         if(ad == null){
             return false;
         }
-        SoldAd sold = new SoldAd(ad.getTitle(), ad.getUser().getUser_id());
+        SoldAd sold = new SoldAd(ad.getTitle(), ad.getUser().getId());
         soldRepository.save(sold);
         adRepository.delete(ad);
         return true;

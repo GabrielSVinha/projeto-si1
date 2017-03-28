@@ -56,17 +56,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Collection<SoldAd>> login(@RequestBody UserForm userForm) {
+    public ResponseEntity<Token> login(@RequestBody UserForm userForm) {
         User user = userService.getByEmailAndPassword(userForm.getEmail(), userForm.getPassword());
 
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        Collection<SoldAd> solds = userService.salesNotifications(user.getUser_id());
-        if(solds == null){
-            return ResponseEntity.ok(null);
-        }
-        return ResponseEntity.ok(solds);
+
+        return ResponseEntity.ok(tokenService.createSessionToken(user));
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

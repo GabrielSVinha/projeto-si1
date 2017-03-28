@@ -46,7 +46,7 @@ public class Ad {
         this.price = price;
         this.type = type;
         this.owner = owner;
-        this.userId = owner.getUser_id();
+        this.userId = owner.getId();
     }
 
     public Ad() {
@@ -147,7 +147,7 @@ public class Ad {
                 "\tcreationDate:" + getCreationDate() +", "+ System.lineSeparator() +
                 "\tprice:" + price +", "+ System.lineSeparator() +
                 "\ttype:'" + type + ", "+ System.lineSeparator() +
-                "\tuserId:" +owner.getUser_id()+", "+ System.lineSeparator() +
+                "\tuserId:" +owner.getId()+", "+ System.lineSeparator() +
                 '}';
     }
 }
