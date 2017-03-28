@@ -103,8 +103,9 @@ public class AdServiceImpl implements AdService {
         /*
         aqui filtramos os anuncios pelo usuario
          */
+
         return anuncioRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getUser().equals(usuarioRepository.findByName(username)))
+                .filter(anuncio -> anuncio.getUser().getUser_id().equals(usuarioRepository.findByName(username).getUser_id()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -117,14 +118,14 @@ public class AdServiceImpl implements AdService {
 
 
     @Override
-    public Collection<Ad> search(String user, String date, String type) {
+    public Collection<Ad> search(String searchContent, String searchType) {
 
-        if (user != null) {
-            return this.getByUser(user);
-        } else if (date != null) {
-            return this.getByDate(date);
-        } else if (type != null) {
-            return this.getByType(type);
+        if (searchType.equals("user")) {
+            return this.getByUser(searchContent);
+        } else if (searchType.equals("date")) {
+            return this.getByDate(searchContent);
+        } else if (searchType.equals("type")) {
+            return this.getByType(searchContent);
         }
 
         throw new RuntimeException("Parametro de busca invalido");

@@ -1,23 +1,18 @@
-(function() {
+(function () {
     'use strict';
 
     app.controller('AdController', AdController);
 
-    AdController.$inject = ['$state', 'AdService'];
+    AdController.$inject = ['$state', 'AdService', '$stateParams', 'UserService'];
 
-    function AdController($state, AdService) {
+    function AdController($state, AdService, $stateParams, UserService) {
         var self = this;
 
         this.ads = [];
 
-        AdService.getAll()
-            .then(function(ads) {
-                self.ads = ads;
-            });
-
-        this.createAd = function(ad) {
+        this.createAd = function (ad) {
             AdService.createAd(ad)
-                .then(function(ad) {
+                .then(function (ad) {
                     if (ad !== null) {
                         self.ads.push(ad);
                         $state.go('^.list');
@@ -25,7 +20,13 @@
                 });
         }
 
-        this.clearAdForm = function(ad, form) {
+        this.search = function (searchContent, searchType) {
+            AdService.searchBy(searchContent, searchType).then((data) => {
+                self.ads = data;
+            });
+        };
+
+        this.clearAdForm = function (ad, form) {
             if (!ad) {
                 return;
             }
@@ -37,6 +38,19 @@
             form.$setPristine();
             form.$setUntouched();
         };
+
+        (() => {
+            if ($state.current.data.loadUserAds) {
+                UserService.getUser().then((user) => {
+                    self.search(user.name, 'user');
+                });
+            } else {
+                AdService.getAll()
+                    .then(function (ads) {
+                        self.ads = ads;
+                    });
+            }
+        })();
     };
 
 })();

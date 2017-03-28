@@ -26,11 +26,9 @@ public class AdController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public Response getUserAnuncios(@QueryParam(value="user") String user,
-                                                          @QueryParam(value="date") String date,
-                                                          @QueryParam(value="type") String type){
-
-        return Response.status(Response.Status.ACCEPTED).entity(adService.search(user, date, type)).build();
+    public ResponseEntity<Collection<Ad>> searchAnuncios(@QueryParam(value="searchContent") String searchContent, @QueryParam(value="searchType") String searchType){
+        return new ResponseEntity<Collection<Ad>>(adService.search(searchContent, searchType), HttpStatus.OK);
+        //return Response.status(Response.Status.ACCEPTED).entity(adService.search(searchContent, searchType)).build();
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -45,7 +43,6 @@ public class AdController {
     public @ResponseBody Response cadastroAnuncio(@RequestBody AdForm anuncioForm){
         Ad adCriado = this.adService.create(anuncioForm);
         if(adCriado == null){
-            //return new ResponseEntity<Ad>(HttpStatus.BAD_REQUEST) ;
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 

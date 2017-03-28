@@ -27,5 +27,5 @@ public interface AdService {
 
     Collection<Ad> getByType(String type);
 
-    Collection<Ad> search(String user, String date, String type);
+    Collection<Ad> search(String searchContent, String searchType);
 }
