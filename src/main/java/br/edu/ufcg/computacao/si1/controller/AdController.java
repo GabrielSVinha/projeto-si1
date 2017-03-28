@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -21,7 +21,7 @@ public class AdController {
     private AdServiceImpl adService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getAllAnuncios(){
+    public ResponseEntity<Collection<Ad>> getAllAds(){
         return new ResponseEntity<Collection<Ad>>(adService.getAll(), HttpStatus.OK);
     }
 
@@ -32,7 +32,7 @@ public class AdController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Ad> deleteAnuncio(@PathVariable long id){
+    public ResponseEntity<Ad> deleteAd(@PathVariable long id){
         if(adService.delete(id)){
             return new ResponseEntity<Ad>(HttpStatus.OK);
         }
@@ -49,13 +49,17 @@ public class AdController {
         return Response.status(Response.Status.CREATED).entity(adCriado).build();
     }
 
-    @RequestMapping(value = "/date", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getAnunciosByDate(@RequestParam(value="date") String date){
-        return new ResponseEntity<Collection<Ad>>(adService.getByDate(date), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/type", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getAnunciosByType(@RequestParam(value="type") String type){
-        return new ResponseEntity<Collection<Ad>>(adService.getByType(type), HttpStatus.OK);
+    @RequestMapping(value = "/sell/{id}", method = RequestMethod.PUT)
+    public @ResponseBody ResponseEntity<Ad> sell(@PathVariable long id, @RequestBody String time){
+        try{
+            if(adService.sellAd(id, time)){
+                return new ResponseEntity<Ad>(HttpStatus.OK);
+            }else{
+                return new ResponseEntity<Ad>(HttpStatus.NOT_FOUND);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<Ad>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

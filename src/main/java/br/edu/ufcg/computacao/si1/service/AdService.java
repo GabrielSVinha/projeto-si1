@@ -17,15 +17,11 @@ public interface AdService {
 
     Collection<Ad> getAll();
 
-    Collection<Ad> getByUser(String username);
-
     boolean update(Ad anuncio);
 
     boolean delete(Long id);
 
-    Collection<Ad> getByDate(String date);
-
-    Collection<Ad> getByType(String type);
-
     Collection<Ad> search(String searchContent, String searchType);
+
+    boolean sellAd(Long id, String time);
 }

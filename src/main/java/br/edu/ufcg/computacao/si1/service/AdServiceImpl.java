@@ -1,9 +1,10 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.ad.Ad;
+import br.edu.ufcg.computacao.si1.model.ad.SoldAd;
 import br.edu.ufcg.computacao.si1.model.form.AdForm;
-import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.repository.AdRepository;
+import br.edu.ufcg.computacao.si1.repository.SoldRepository;
 import br.edu.ufcg.computacao.si1.repository.UserRepository;
 import br.edu.ufcg.computacao.si1.service.factory.AdFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,24 @@ import java.util.stream.Collectors;
 public class AdServiceImpl implements AdService {
     //TODO add validity checks
 
-    private AdRepository anuncioRepository;
-    private UserRepository usuarioRepository;
+    private AdRepository adRepository;
+
+    private UserRepository userRepository;
+
+    private SoldRepository soldRepository;
 
     @Autowired
     private AdFactory factory;
 
     @Autowired
-    public AdServiceImpl(AdRepository anuncioRepository, UserRepository userRepository) {
-        this.anuncioRepository = anuncioRepository;
-        this.usuarioRepository = userRepository;
+    public AdServiceImpl(AdRepository adRepository, UserRepository userRepository, SoldRepository soldRepository) {
+        this.adRepository = adRepository;
+        this.userRepository = userRepository;
+        this.soldRepository = soldRepository;
     }
 
-    public AdRepository getAnuncioRepository(){
-        return this.anuncioRepository;
+    public AdRepository getAdRepository(){
+        return this.adRepository;
     }
 
     public Collection<Ad> getAnunciosDoUsuario(){return null;}
@@ -39,7 +44,7 @@ public class AdServiceImpl implements AdService {
     public Ad create(AdForm form) {
         Ad anuncio = factory.create(form);
         if(anuncio != null){
-            anuncioRepository.save(anuncio);
+            adRepository.save(anuncio);
             return anuncio;
         }
         return null;
@@ -48,7 +53,7 @@ public class AdServiceImpl implements AdService {
     @Override
     public Ad getById(Long id) {
         /*aqui recuperamos o anuncio pelo seu id*/
-        return anuncioRepository.findOne(id);
+        return adRepository.findOne(id);
     }
 
     @Override
@@ -56,7 +61,7 @@ public class AdServiceImpl implements AdService {
 
         /*pegamos aqui todos os anuncios, mas retornamos os anuncios por tipo
         * filtrando o tipo, pelo equals, retornando um arrayLista*/
-        return anuncioRepository.findAll().stream()
+        return adRepository.findAll().stream()
                 .filter(anuncio -> anuncio.getType().equals(tipo))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -65,14 +70,14 @@ public class AdServiceImpl implements AdService {
     public Collection<Ad> getAll() {
         /*aqui retornamos todos os anuncios, sem distincao*/
 
-        return anuncioRepository.findAll();
+        return adRepository.findAll();
     }
 
     @Override
     public boolean update(Ad anuncio) {
         /*a atualizacao do anuncio eh feita apenas se o anuncio ja existir*/
-        if (anuncioRepository.exists(anuncio.getId())) {
-            anuncioRepository.save(anuncio);
+        if (adRepository.exists(anuncio.getId())) {
+            adRepository.save(anuncio);
             return true;
         }
         return false;
@@ -83,41 +88,35 @@ public class AdServiceImpl implements AdService {
         /*aqui se apaga o anuncio se ele existir*/
 
 
-        if (anuncioRepository.exists(id)) {
-            anuncioRepository.delete(id);
+        if (adRepository.exists(id)) {
+            adRepository.delete(id);
             return true;
         }
         return false;
     }
 
-    @Override
-    public Collection<Ad> getByDate(String date) {
+    private Collection<Ad> getByDate(String date) {
 
-        return anuncioRepository.findAll().stream()
+        return adRepository.findAll().stream()
                 .filter(anuncio -> anuncio.getCreationDate().toString().contains(date))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    @Override
-    public Collection<Ad> getByUser(String username) {
+    private Collection<Ad> getByUser(String username) {
         /*
         aqui filtramos os anuncios pelo usuario
          */
-
-        return anuncioRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getUser().getUser_id().equals(usuarioRepository.findByName(username).getUser_id()))
+        return adRepository.findAll().stream()
+                .filter(anuncio -> anuncio.getUser().getUser_id().equals(userRepository.findByName(username).getUser_id()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    @Override
-    public Collection<Ad> getByType(String type) {
-        return anuncioRepository.findAll().stream()
+    private Collection<Ad> getByType(String type) {
+        return adRepository.findAll().stream()
                 .filter(anuncio -> anuncio.getType().name().equalsIgnoreCase(type))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-
-    @Override
     public Collection<Ad> search(String searchContent, String searchType) {
 
         if (searchType.equals("user")) {
@@ -129,6 +128,17 @@ public class AdServiceImpl implements AdService {
         }
 
         throw new RuntimeException("Parametro de busca invalido");
+    }
+
+    public boolean sellAd(Long id, String time){
+        Ad ad = this.adRepository.findOne(id);
+        if(ad == null){
+            return false;
+        }
+        SoldAd sold = new SoldAd(ad.getTitle(), ad.getUser().getUser_id());
+        soldRepository.save(sold);
+        adRepository.delete(ad);
+        return true;
     }
 
 }
