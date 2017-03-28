@@ -1,34 +1,36 @@
-<div class="col-md-offset-2 col-md-8">
-    <div class="panel panel-default">
-        <div class="panel-heading">Informações do Usuário
+<div class="container">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Informações do Usuário
 
+            </div>
         </div>
-    </div>
-    
-    <div class="table-responsive">
-        <table style="width:100%" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Titulo</th>
-                    <th>Tipo</th>
-                    <th>Postado</th>
-                    <th align="right">Preço</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="ad in profileCtrl.userAds track by $index">
-                    <td>{{ :: ad.title }}</td>
-                    <td>{{ :: ad.type }}</td>
-                    <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
-                    <td align="center">{{ :: ad.price | currency:'R$' }}</td>
-                </tr>
-                <tr ng-show="profileCtrl.userAds.length === 0">
-                    <td>Você não possui nenhum anúncio</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="table-responsive">
+            <table style="width:100%" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Tipo</th>
+                        <th>Postado</th>
+                        <th align="right">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ad in profileCtrl.userAds track by $index">
+                        <td>{{ :: ad.title }}</td>
+                        <td>{{ :: ad.type }}</td>
+                        <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
+                        <td align="center">{{ :: ad.price | currency:'R$' }}</td>
+                    </tr>
+                    <tr ng-show="profileCtrl.userAds.length === 0">
+                        <td>Você não possui nenhum anúncio</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

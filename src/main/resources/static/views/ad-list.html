@@ -1,65 +1,67 @@
-<div class="col-md-offset-2 col-md-8">
-    <h1>Anúncios</h1>
-    <a class="btn btn-success" style="margin-bottom: 15px;" ui-sref="^.create">
-        Cadastrar anúncio
-    </a> <br>
+<div class="container">
+    <div class="col-md-12">
+        <h1>Anúncios</h1>
+        <a class="btn btn-success" style="margin-bottom: 15px;" ui-sref="^.create">
+            Cadastrar anúncio
+        </a> <br>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Buscar anúncio por...</div>
-    
-        <div style="margin-left: 20px; margin-top: 10px">
-            <label class="radio-inline radio-primary">
-                <input type="radio" name="searchType" ng-model="searchType" ng-value="'user'" checked=checked>
-                Usuário
-            </label>
-            
-            <label class="radio-inline radio-primary">
-                <input type="radio" name="searchType" ng-model="searchType" ng-value="'date'">
-                Data
-            </label>
-            
-            <label class="radio-inline radio-primary">
-                <input type="radio" name="searchType" ng-model="searchType" ng-value="'type'">
-                Tipo
-            </label>
-        </div>
-        
-        <div class="panel-body">
-            <div class="col-xs-4">
-                <input class="form-control" type="text" placeholder="username, 01-jan-2017, job" ng-model="searchBox">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar anúncio por...</div>
+
+            <div style="margin-left: 20px; margin-top: 10px">
+                <label class="radio-inline radio-primary">
+                    <input type="radio" name="searchType" ng-model="searchType" ng-value="'user'" checked=checked>
+                    Usuário
+                </label>
+
+                <label class="radio-inline radio-primary">
+                    <input type="radio" name="searchType" ng-model="searchType" ng-value="'date'">
+                    Data
+                </label>
+
+                <label class="radio-inline radio-primary">
+                    <input type="radio" name="searchType" ng-model="searchType" ng-value="'type'">
+                    Tipo
+                </label>
             </div>
-            <div class="col-xs-3">
-                <a class="btn btn-primary" style="margin-bottom: 15px;" ng-disabled="!searchBox" ng-click="adsCtrl.search(searchBox, searchType)">
-                Buscar
-                </a>
+
+            <div class="panel-body">
+                <div class="col-xs-4">
+                    <input class="form-control" type="text" placeholder="username, 01-jan-2017, job" ng-model="searchBox">
+                </div>
+                <div class="col-xs-3">
+                    <a class="btn btn-primary" style="margin-bottom: 15px;" ng-disabled="!searchBox" ng-click="adsCtrl.search(searchBox, searchType)">
+                    Buscar
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="table-responsive">
-        <table style="width:100%" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Titulo</th>
-                    <th>Tipo</th>
-                    <th>Postado</th>
-                    <th align="right">Preço</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="ad in adsCtrl.ads track by $index">
-                    <td>{{ :: ad.title }}</td>
-                    <td>{{ :: ad.type }}</td>
-                    <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
-                    <td align="center">{{ :: ad.price | currency:'R$' }}</td>
-                </tr>
-                <tr ng-show="adsCtrl.ads.length === 0">
-                    <td>Não existem anúncios</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="table-responsive">
+            <table style="width:100%" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Tipo</th>
+                        <th>Postado</th>
+                        <th align="right">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ad in adsCtrl.ads track by $index">
+                        <td>{{ :: ad.title }}</td>
+                        <td>{{ :: ad.type }}</td>
+                        <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
+                        <td align="center">{{ :: ad.price | currency:'R$' }}</td>
+                    </tr>
+                    <tr ng-show="adsCtrl.ads.length === 0">
+                        <td>Não existem anúncios</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
