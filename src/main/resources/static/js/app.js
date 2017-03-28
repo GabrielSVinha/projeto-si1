@@ -26,9 +26,6 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ng
                         return UserService
                             .getUser()
                             .catch(() => ({}));
-                    }],
-                    state: ['$state', function($state) {
-                        return $state;
                     }]
                 },
                 template: `
@@ -67,28 +64,18 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ng
             })
             .state('ads', {
                 parent: 'app',
-                abstract: false,
+                abstract: true,
                 url: '/anuncios',
                 controller: 'AdController',
                 controllerAs: 'adsCtrl',
                 template: '<div ui-view></div>'
             })
                 .state('ads.list', {
-                    data: {
-                        loadUserAds: false
-                    },
                     url: '/lista',
                     templateUrl: '/views/ad-list.html'
                 })
                 .state('ads.create', {
                     url: '/novo',
                     templateUrl: '/views/create-ad.html'
-                })
-                .state('ads.myList', {
-                    data: {
-                        loadUserAds: true
-                    },
-                    url: '/meus-anuncios',
-                    templateUrl: '/views/ad-list.html'
                 });
     }]);

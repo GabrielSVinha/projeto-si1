@@ -10,6 +10,11 @@
 
         this.ads = [];
 
+        AdService.getAll()
+                    .then(function (ads) {
+                        self.ads = ads;
+                    });
+
         this.createAd = function (ad) {
             AdService.createAd(ad)
                 .then(function (ad) {
@@ -38,19 +43,6 @@
             form.$setPristine();
             form.$setUntouched();
         };
-
-        (() => {
-            if ($state.current.data.loadUserAds) {
-                UserService.getUser().then((user) => {
-                    self.search(user.name, 'user');
-                });
-            } else {
-                AdService.getAll()
-                    .then(function (ads) {
-                        self.ads = ads;
-                    });
-            }
-        })();
     };
 
 })();
