@@ -12,7 +12,7 @@
             UserService.login(user)
                 .then(function(user) {
                     if (user !== null) {
-                        $state.go('profile');
+                        $state.go('profile', {profile: user});
                     }
                 })
                 .catch(function() {

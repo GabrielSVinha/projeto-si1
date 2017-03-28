@@ -84,5 +84,9 @@
         this.isLoggedIn = function() {
             return self.user !== null && angular.isDefined($cookies.get('token'));
         };
+        this.sold_ads = function(){
+            return $http.get("/api/user/" + user.id)
+                .then(response => response.data)
+        };
     }
 })();
