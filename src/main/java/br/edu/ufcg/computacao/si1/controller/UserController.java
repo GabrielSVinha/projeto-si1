@@ -56,17 +56,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Collection<SoldAd>> login(@RequestBody UserForm userForm) {
+    public ResponseEntity<Token> login(@RequestBody UserForm userForm) {
+
         User user = userService.getByEmailAndPassword(userForm.getEmail(), userForm.getPassword());
 
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        Collection<SoldAd> solds = userService.salesNotifications(user.getUser_id());
-        if(solds == null){
-            return ResponseEntity.ok(null);
-        }
-        return ResponseEntity.ok(solds);
+
+        return ResponseEntity.ok(tokenService.createSessionToken(user));
+    }
+
+    @RequestMapping(value = "/sold/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Collection<SoldAd>> soldAds(@PathVariable long id){
+        return ResponseEntity.ok(this.userService.salesNotifications(id));
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -81,6 +84,8 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
+
+
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
     public ResponseEntity<User> getLoggedUser(@RequestHeader(value="Authorization") String tokenKey) {
