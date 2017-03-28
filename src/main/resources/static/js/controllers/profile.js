@@ -3,11 +3,21 @@
 
     app.controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$state', 'UserService', 'flash', '$stateParams'];
+    ProfileController.$inject = ['$state', 'UserService', 'AdService', 'flash'];
 
-    function ProfileController($state, $stateParams, UserService, flash) {
+    function ProfileController($state, UserService, AdService, flash) {
         var self = this;
-        var user = $stateParams["user"];
-        var sold_ads = $stateParams["sold_ads"](user["user_id"]);
+
+        this.soldAds = [];
+        this.user = null;
+
+        UserService.getUser()
+            .then(function(user) {
+                self.user = user;
+                return AdService.getSoldAds(user.user_id);
+            })
+            .then(function(soldAds) {
+                self.soldAds = soldAds;
+            });
     }
 })();

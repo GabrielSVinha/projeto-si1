@@ -35,7 +35,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<User> createUser(@RequestBody UserForm userForm) {
         User user = userService.create(userForm);
 

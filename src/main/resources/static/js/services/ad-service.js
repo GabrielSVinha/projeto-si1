@@ -24,5 +24,10 @@
                 })
                 .then(response => response.data);
         };
+
+        this.getSoldAds = function(userId) {
+            return $http.get('/api/user/sold/' + userId)
+                .then(response => response.data);
+        };
     }
 })();
