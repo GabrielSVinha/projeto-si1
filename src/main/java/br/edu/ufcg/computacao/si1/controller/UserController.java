@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.model.ad.SoldAd;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.security.auth.Token;
@@ -55,14 +56,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Token> login(@RequestBody UserForm userForm) {
+    public ResponseEntity<Collection<SoldAd>> login(@RequestBody UserForm userForm) {
         User user = userService.getByEmailAndPassword(userForm.getEmail(), userForm.getPassword());
 
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
-        return ResponseEntity.ok(tokenService.createSessionToken(user));
+        Collection<SoldAd> solds = userService.salesNotifications(user.getUser_id());
+        if(solds == null){
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(solds);
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
