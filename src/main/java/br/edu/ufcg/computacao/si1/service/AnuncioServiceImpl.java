@@ -29,16 +29,18 @@ public class AnuncioServiceImpl implements AnuncioService {
         this.anuncioRepository = anuncioRepository;
     }
 
-    public AnuncioRepository getAnuncioRepository(){
+    public AnuncioRepository getAnuncioRepository() {
         return this.anuncioRepository;
     }
 
-    public Collection<Anuncio> getAnunciosDoUsuario(){return null;}
+    public Collection<Anuncio> getAnunciosDoUsuario() {
+        return null;
+    }
 
     @Override
     public Anuncio create(AnuncioForm form) {
         Anuncio anuncio = factory.create(form);
-        if(anuncio != null){
+        if (anuncio != null) {
             anuncioRepository.save(anuncio);
             return anuncio;
         }
@@ -57,7 +59,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         /*pegamos aqui todos os anuncios, mas retornamos os anuncios por tipo
         * filtrando o tipo, pelo equals, retornando um arrayLista*/
         return anuncioRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getTipo().equals(tipo))
+                .filter(anuncio -> anuncio.getType().equals(tipo))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -71,7 +73,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     @Override
     public boolean update(Anuncio anuncio) {
         /*a atualizacao do anuncio eh feita apenas se o anuncio ja existir*/
-        if (anuncioRepository.exists(anuncio.get_id())) {
+        if (anuncioRepository.exists(anuncio.getId())) {
             anuncioRepository.save(anuncio);
             return true;
         }

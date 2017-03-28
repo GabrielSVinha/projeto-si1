@@ -86,10 +86,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
                 Usuario usuario = usuarioService.getByEmail(email).get();
-                if(usuario != null){
-                    return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true,
-                            AuthorityUtils.createAuthorityList(usuario.getR()));
-                }else {
+                if (usuario != null) {
+                    return new User(usuario.getEmail(), usuario.getPassword(), true, true, true, true,
+                            AuthorityUtils.createAuthorityList(usuario.getRole()));
+                } else {
                     throw new UsernameNotFoundException("Não foi possível localizar o usuário" + usuario);
                 }
             }

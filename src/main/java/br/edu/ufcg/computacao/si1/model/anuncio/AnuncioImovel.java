@@ -12,12 +12,11 @@ import java.util.Date;
 @Entity
 public class AnuncioImovel extends Anuncio {
 
-    public AnuncioImovel(String titulo, Date dataDeCriacao, double preco, String nota, String tipo, Usuario owner) {
-        super(titulo, dataDeCriacao, preco, nota, tipo, owner);
+    public AnuncioImovel(String title, Date creationDate, double price, String note, String type, Usuario owner) {
+        super(title, creationDate, price, note, type, owner);
     }
 
     AnuncioImovel(){
         super();
     }
-
 }

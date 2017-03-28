@@ -9,32 +9,35 @@ public class UsuarioForm {
     @NotNull(message = "O nome não pode ser nulo.")
     @NotEmpty(message = "O nome não pode ser vazio.")
     @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.")
-    private String nome;
+    private String name;
+
     @NotEmpty(message = "O email não pode ser vazio.")
     @Email
     private String email;
+
     @NotNull(message = "A senha não pode ser nula.")
     @NotEmpty
     @Size(min = 4, max = 16, message = "A senha deve ter entre 4 e 16 caracteres.")
-    private String senha;
+    private String password;
+
     @NotNull
     private Integer role;
 
     public UsuarioForm() {}
 
-    public UsuarioForm(String nome, String email, String senha, Integer role) {
-        this.nome = nome;
+    public UsuarioForm(String name, String email, String password, Integer role) {
+        this.name = name;
         this.email = email;
-        this.senha = senha;
+        this.password = password;
         this.role = role;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -45,12 +48,12 @@ public class UsuarioForm {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getRole() {

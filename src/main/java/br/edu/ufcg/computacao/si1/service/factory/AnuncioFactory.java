@@ -27,30 +27,30 @@ public class AnuncioFactory {
     private UsuarioRepository user;
 
     public Anuncio create(AnuncioForm form){
-        switch (form.getTipo()){
+        switch (form.getType()){
             case "movel":
-                return new AnuncioMovel(form.getTitulo(),
+                return new AnuncioMovel(form.getTitle(),
                                         new Date(),
-                                        form.getPreco(),
+                                        form.getPrice(),
                                         null,
                                         "MOVEL",
-                                        user.findOne(form.getUser()));
+                                        user.findOne(form.getUserId()));
 
             case "imovel":
-                return new AnuncioImovel(form.getTitulo(),
+                return new AnuncioImovel(form.getTitle(),
                                          new Date(),
-                                         form.getPreco(),
+                                         form.getPrice(),
                                          null,
                                          "IMOVEL",
-                                         user.findOne(form.getUser()));
+                                         user.findOne(form.getUserId()));
 
             case "emprego":
-                return new AnuncioEmprego(form.getTitulo(),
+                return new AnuncioEmprego(form.getTitle(),
                                           new Date(),
-                                          form.getPreco(),
+                                          form.getPrice(),
                                           null,
                                           "EMPREGO",
-                                          user.findOne(form.getUser())) ;
+                                          user.findOne(form.getUserId())) ;
 
             default:
                 break;
