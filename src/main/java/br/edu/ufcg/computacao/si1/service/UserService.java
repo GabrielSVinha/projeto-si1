@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.model.ad.SoldAd;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.security.auth.Token;
@@ -21,4 +22,6 @@ public interface UserService {
     boolean delete(Long id);
 
     User getByEmailAndPassword(String email, String password);
+
+    Collection<SoldAd> salesNotifications(Long id);
 }
