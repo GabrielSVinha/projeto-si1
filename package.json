@@ -10,5 +10,11 @@
   "description": "",
   "main": "",
   "license": "MIT",
-  "private": true 
+  "private": true,
+  "scripts": {
+      "postinstall": "bower install"
+  },
+  "dependencies": {
+      "bower": "^1.8.0"
+  }
 }
