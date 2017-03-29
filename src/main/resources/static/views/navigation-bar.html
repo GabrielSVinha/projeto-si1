@@ -26,6 +26,9 @@
                     <a ui-sref="profile">Olá, {{ user.name }}</a>
                 </li>
                 <li>
+                    <a>Saldo {{ user.balance | currency:'R$' }}</a>
+                </li>
+                <li>
                     <a href ng-click="logout()">Logout</a>
                 </li>
             </ul>
