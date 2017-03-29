@@ -87,7 +87,7 @@
 					<addResources>true</addResources>
 				</configuration>
       </plugin>
-    </plugin>
+    </plugins>
       
 	</build>
 
