@@ -11,7 +11,7 @@ import java.util.Collection;
 public class User extends org.springframework.security.core.userdetails.User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long user_id;
+    private Long id;
 
     @Column
     private String name;
@@ -24,6 +24,9 @@ public class User extends org.springframework.security.core.userdetails.User {
 
     @Column
     private UserType type;
+
+    @Column
+    private double balance = 0.0;
 
     @OneToMany(mappedBy = "owner", targetEntity = Ad.class, cascade = CascadeType.ALL)
     @Column
@@ -42,12 +45,12 @@ public class User extends org.springframework.security.core.userdetails.User {
         super("default", "default", AuthorityUtils.NO_AUTHORITIES);
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,4 +85,11 @@ public class User extends org.springframework.security.core.userdetails.User {
         this.type = type;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }

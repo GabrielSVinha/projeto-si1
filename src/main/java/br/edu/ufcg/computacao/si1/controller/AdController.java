@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 
 @RestController
-@RequestMapping(value = "/api/anuncios")
+@RequestMapping(value = "/api/ad")
 public class AdController {
 
     @Autowired
@@ -24,26 +25,31 @@ public class AdController {
         return new ResponseEntity<Collection<Ad>>(adService.getAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getAdByUser(@RequestParam(value="user") String user){
-        return new ResponseEntity<Collection<Ad>>(adService.getByUser(user), HttpStatus.OK);
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ResponseEntity<Collection<Ad>> searchAnuncios(@QueryParam(value="searchContent") String searchContent, @QueryParam(value="searchType") String searchType){
+        return new ResponseEntity<Collection<Ad>>(adService.search(searchContent, searchType), HttpStatus.OK);
+        //return Response.status(Response.Status.ACCEPTED).entity(adService.search(searchContent, searchType)).build();
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Ad> deleteAd(@PathVariable long id){
-        if(adService.delete(id)){
+        if (adService.delete(id)) {
             return new ResponseEntity<Ad>(HttpStatus.OK);
         }
         return new ResponseEntity<Ad>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<Ad> addAdvertisement(@RequestBody AdForm anuncioForm){
-        if(this.adService.create(anuncioForm) == null){
-            return new ResponseEntity<Ad>(HttpStatus.BAD_REQUEST);
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<Ad> cadastroAnuncio(@RequestBody AdForm anuncioForm) {
+        System.out.println(anuncioForm);
+
+        Ad adCriado = adService.create(anuncioForm);
+
+        if (adCriado == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<Ad>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/sell/{id}", method = RequestMethod.PUT)
@@ -58,15 +64,5 @@ public class AdController {
             e.printStackTrace();
             return new ResponseEntity<Ad>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @RequestMapping(value = "/date", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getAdsByDate(@RequestParam(value="date") String date){
-        return new ResponseEntity<Collection<Ad>>(adService.getByDate(date), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/type", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Ad>> getAdsByType(@RequestParam(value="type") String type){
-        return new ResponseEntity<Collection<Ad>>(adService.getByType(type), HttpStatus.OK);
     }
 }

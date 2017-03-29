@@ -57,7 +57,6 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Token> login(@RequestBody UserForm userForm) {
-
         User user = userService.getByEmailAndPassword(userForm.getEmail(), userForm.getPassword());
 
         if (user == null) {
