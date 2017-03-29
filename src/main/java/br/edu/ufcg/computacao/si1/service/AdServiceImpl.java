@@ -36,10 +36,12 @@ public class AdServiceImpl implements AdService {
     @Override
     public Ad create(AdForm form) {
         Ad anuncio = factory.create(form);
-        if(anuncio != null){
+
+        if (anuncio != null) {
             adRepository.save(anuncio);
             return anuncio;
         }
+
         return null;
     }
 

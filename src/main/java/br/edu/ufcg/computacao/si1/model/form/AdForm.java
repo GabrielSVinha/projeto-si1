@@ -75,5 +75,21 @@ public class AdForm {
     public void setType(AdType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+
+        result += "AdForm {\n";
+
+        result += "\ttitle = '" + title + "'\n";
+        result += "\tprice = " + price + "\n";
+        result += "\ttype = '" + type + "'\n";
+        result += "\tuserId = " + userId + "\n";
+
+        result += "}";
+
+        return result;
+    }
 }
 

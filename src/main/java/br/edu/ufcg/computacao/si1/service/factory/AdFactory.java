@@ -25,18 +25,24 @@ public class AdFactory {
 
             case REALTY:
                 return new Ad(form.getTitle(),
-                                         new Date(),
-                                         form.getPrice(),
-                                         AdType.REALTY,
-                                         userRepository.findOne(form.getUserId()));
+                              new Date(),
+                              form.getPrice(),
+                              AdType.REALTY,
+                              userRepository.findOne(form.getUserId()));
 
             case JOB:
                 return new Ad(form.getTitle(),
-                                          new Date(),
-                                          form.getPrice(),
-                                          AdType.JOB,
-                                          userRepository.findOne(form.getUserId())) ;
+                              new Date(),
+                              form.getPrice(),
+                              AdType.JOB,
+                              userRepository.findOne(form.getUserId()));
 
+            case NONE:
+                return new Ad(form.getTitle(),
+                              new Date(),
+                              form.getPrice(),
+                              AdType.NONE,
+                              userRepository.findOne(form.getUserId()));
             default:
                 break;
         }
