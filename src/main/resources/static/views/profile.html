@@ -1,10 +1,26 @@
 <div class="col-md-offset-2 col-md-8">
     <div class="panel panel-default">
-        <div class="panel-heading">Informações do Usuário
+        <div class="panel-heading">Minhas informações
 
+        </div>
+        <div class="panel-body">
+            <div style="margin: auto">
+                <h5>Nome</h5>
+                <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[0] }}</textarea>
+            </div>
+            <div style="margin: auto">
+                <h5>Email</h5>
+                <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[1] }}</textarea>
+            </div>
+            <div style="margin: auto">
+                <h5>Saldo</h5>
+                <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[2] | currency:'R$' }}</textarea>
+            </div>
         </div>
     </div>
     
+    <br>
+    <h2>Meus anúncios</h2>
     <div class="table-responsive">
         <table style="width:100%" class="table table-bordered">
             <thead>

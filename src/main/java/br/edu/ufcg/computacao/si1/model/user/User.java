@@ -25,6 +25,9 @@ public class User extends org.springframework.security.core.userdetails.User {
     @Column
     private UserType type;
 
+    @Column
+    private double balance = 0.0;
+
     @OneToMany(mappedBy = "owner", targetEntity = Ad.class, cascade = CascadeType.ALL)
     @Column
     private Collection<Ad> anuncios;
@@ -82,4 +85,11 @@ public class User extends org.springframework.security.core.userdetails.User {
         this.type = type;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }

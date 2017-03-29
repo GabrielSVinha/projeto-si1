@@ -9,16 +9,25 @@
         var self = this;
 
         this.userAds = [];
+        this.userInfo = [];
 
-        UserService.getUser().then((user) => {
+        this.getUser = function() {
+            return UserService.getUser();
+        };
+
+        this.getUser().then((user) => {
             AdService.searchBy(user.name, 'user').then((data) => {
                 self.userAds = data;
             });
         });
 
-        console.log(this.userAds);
+        this.getUser().then((userData) => {
+            this.userInfo.push(userData.name);
+            this.userInfo.push(userData.email);
+            this.userInfo.push(userData.balance);
+        });
 
-
+        console.log(this.getUser());
     }
 
 })();
