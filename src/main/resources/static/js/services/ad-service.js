@@ -21,11 +21,11 @@
         this.createAd = function(ad) {
             return UserService.getUser()
                 .then(function(user) {
-                    ad.user = user.user_id;
+                    ad.userId = user.id;
                     return ad;
                 })
                 .then(function(ad) {
-                    return $http.post('/api/ad/new', ad);
+                    return $http.post('/api/ad/', ad);
                 })
                 .then(response => response.entity);
         };

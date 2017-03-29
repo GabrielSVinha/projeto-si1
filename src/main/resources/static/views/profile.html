@@ -1,50 +1,48 @@
 <div class="col-md-offset-2 col-md-8">
     <div class="panel panel-default">
         <div class="panel-heading">Minhas informações
-
+            <div class="panel-body">
+                <div style="margin: auto">
+                    <h5>Nome</h5>
+                    <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[0] }}</textarea>
+                </div>
+                <div style="margin: auto">
+                    <h5>Email</h5>
+                    <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[1] }}</textarea>
+                </div>
+                <div style="margin: auto">
+                    <h5>Saldo</h5>
+                    <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[2] | currency:'R$' }}</textarea>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <div style="margin: auto">
-                <h5>Nome</h5>
-                <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[0] }}</textarea>
-            </div>
-            <div style="margin: auto">
-                <h5>Email</h5>
-                <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[1] }}</textarea>
-            </div>
-            <div style="margin: auto">
-                <h5>Saldo</h5>
-                <textarea class="textarea col-xs-3" readonly>{{ profileCtrl.userInfo[2] | currency:'R$' }}</textarea>
-            </div>
+        <br>
+        <h2>Meus anúncios</h2>
+        <div class="table-responsive">
+            <table style="width:100%" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Tipo</th>
+                        <th>Postado</th>
+                        <th align="right">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ad in profileCtrl.userAds track by $index">
+                        <td>{{ :: ad.title }}</td>
+                        <td>{{ :: ad.type }}</td>
+                        <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
+                        <td align="center">{{ :: ad.price | currency:'R$' }}</td>
+                    </tr>
+                    <tr ng-show="profileCtrl.userAds.length === 0">
+                        <td>Você não possui nenhum anúncio</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-    
-    <br>
-    <h2>Meus anúncios</h2>
-    <div class="table-responsive">
-        <table style="width:100%" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Titulo</th>
-                    <th>Tipo</th>
-                    <th>Postado</th>
-                    <th align="right">Preço</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="ad in profileCtrl.userAds track by $index">
-                    <td>{{ :: ad.title }}</td>
-                    <td>{{ :: ad.type }}</td>
-                    <td>{{ :: ad.creationDate | dateToTimestamp | date:'dd/MM/yyyy HH:mm' }}</td>
-                    <td align="center">{{ :: ad.price | currency:'R$' }}</td>
-                </tr>
-                <tr ng-show="profileCtrl.userAds.length === 0">
-                    <td>Você não possui nenhum anúncio</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </div>

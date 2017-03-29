@@ -11,17 +11,19 @@
         this.ads = [];
 
         AdService.getAll()
-                    .then(function (ads) {
-                        self.ads = ads;
-                    });
+            .then(function (ads) {
+                self.ads = ads;
+            });
 
         this.createAd = function (ad) {
-            AdService.createAd(ad)
-                .then(function (ad) {
-                    if (ad !== null) {
-                        self.ads.push(ad);
-                        $state.go('^.list');
-                    }
+            AdService
+                .createAd(ad)
+                .then(function () {
+                    return AdService.getAll();
+                })
+                .then(function(ads) {
+                    self.ads = ads;
+                    $state.go('^.list');
                 });
         }
 

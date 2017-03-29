@@ -37,7 +37,7 @@
         };
 
         this.registerUser = function(user) {
-            return $http.post('/api/user/new', user)
+            return $http.post('/api/user/', user)
                 .then(response => response.data)
                 .then(function(user) {
                     self.user = user;
