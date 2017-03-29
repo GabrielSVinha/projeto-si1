@@ -12,3 +12,4 @@ target/
 .metadata
 
 vendor/
+node_modules/
