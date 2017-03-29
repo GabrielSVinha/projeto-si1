@@ -9,18 +9,23 @@ import java.util.Optional;
 
 public interface AdService {
 
-    Ad create(AdForm ad);
+    Ad create(AdForm anuncio);
 
     Ad getById(Long id);
 
-    Collection<Ad> getByType(String tipo);
+    Collection<Ad> get(String tipo);
 
     Collection<Ad> getAll();
 
-    Collection<Ad> getByUsername(String username);
+    Collection<Ad> getByUser(String username);
 
-    boolean update(Ad ad);
+    boolean update(Ad anuncio);
 
     boolean delete(Long id);
 
+    Collection<Ad> getByDate(String date);
+
+    Collection<Ad> getByType(String type);
+
+    boolean sellAd(Long id, String time);
 }

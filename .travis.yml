@@ -10,5 +10,14 @@ postgres:
 before_script:
   - psql -U postgres template1 -c "alter user postgres with password 'admin'"
   - psql -U postgres -c 'create database ad_extreme;'
+  - npm install -g bower
+  - bower install
 notifications:
   slack: dreamteamsi1:3Ngf9fFmx8JOmxaA7GDwOdd6
+deploy:
+ provider: heroku
+ api-key: 
+  secure: $HEROKU_API_KEY
+ app: adxtreme
+ on: 
+  branch: ci-deploy

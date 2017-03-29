@@ -1,4 +1,4 @@
-var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ngCookies'])
+var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ngCookies', 'flash'])
     .config(['$locationProvider', '$stateProvider', '$httpProvider', function($locationProvider, $stateProvider, $httpProvider) {
         $locationProvider.html5Mode(true);
 
@@ -46,7 +46,10 @@ var app = angular.module('ad-extreme', ['ui.router', 'ngMessages', 'ngAria', 'ng
                 url: '/perfil',
                 templateUrl: '/views/profile.html',
                 controller: 'ProfileController',
-                controllerAs: 'profileCtrl'
+                controllerAs: 'profileCtrl',
+                params: {
+                    profile: null
+                }
             })
             .state('register', {
                 parent: 'app',

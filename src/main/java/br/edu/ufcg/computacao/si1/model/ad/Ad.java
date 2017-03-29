@@ -5,7 +5,6 @@ import br.edu.ufcg.computacao.si1.model.user.User;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,7 +46,7 @@ public class Ad {
         this.price = price;
         this.type = type;
         this.owner = owner;
-        this.userId = owner.getId();
+        this.userId = owner.getUser_id();
     }
 
     public Ad() {
@@ -148,7 +147,7 @@ public class Ad {
                 "\tcreationDate:" + getCreationDate() +", "+ System.lineSeparator() +
                 "\tprice:" + price +", "+ System.lineSeparator() +
                 "\ttype:'" + type + ", "+ System.lineSeparator() +
-                "\tuserId:" +owner.getId()+", "+ System.lineSeparator() +
+                "\tuserId:" +owner.getUser_id()+", "+ System.lineSeparator() +
                 '}';
     }
 }

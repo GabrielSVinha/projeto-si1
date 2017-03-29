@@ -1,0 +1,6 @@
+"dependencies": {
+    "bower": "0.6.x"
+},
+"scripts": {
+    "postinstall": "bower install"
+}

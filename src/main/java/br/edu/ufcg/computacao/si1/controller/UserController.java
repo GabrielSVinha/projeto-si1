@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.model.ad.SoldAd;
 import br.edu.ufcg.computacao.si1.model.form.UserForm;
 import br.edu.ufcg.computacao.si1.model.user.User;
 import br.edu.ufcg.computacao.si1.security.auth.Token;
@@ -34,7 +35,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity<User> createUser(@RequestBody UserForm userForm) {
         User user = userService.create(userForm);
 
@@ -56,6 +57,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Token> login(@RequestBody UserForm userForm) {
+
         User user = userService.getByEmailAndPassword(userForm.getEmail(), userForm.getPassword());
 
         if (user == null) {
@@ -63,6 +65,11 @@ public class UserController {
         }
 
         return ResponseEntity.ok(tokenService.createSessionToken(user));
+    }
+
+    @RequestMapping(value = "/sold/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Collection<SoldAd>> soldAds(@PathVariable long id){
+        return ResponseEntity.ok(this.userService.salesNotifications(id));
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -77,6 +84,8 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
+
+
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
     public ResponseEntity<User> getLoggedUser(@RequestHeader(value="Authorization") String tokenKey) {
